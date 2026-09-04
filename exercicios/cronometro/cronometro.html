@@ -37,11 +37,15 @@
 
         .container {
             background: white;
+
             width: 400px;
+
             padding: 40px;
+
             text-align: center;
 
             border: 2px solid #90caf9;
+
             border-radius: 20px;
 
             box-shadow: 0 10px 25px rgba(0, 100, 200, 0.15);
@@ -49,29 +53,37 @@
 
         h1 {
             color: #1976d2;
+
             margin-bottom: 25px;
         }
 
         #cronometro {
             font-size: 55px;
+
             font-weight: bold;
+
             color: #1565c0;
+
             margin-bottom: 30px;
         }
 
         .botoes {
             display: flex;
+
             flex-direction: column;
+
             gap: 12px;
         }
 
         button {
             width: 100%;
+
             padding: 12px;
 
             border-radius: 10px;
 
             font-size: 18px;
+
             font-weight: bold;
 
             cursor: pointer;
@@ -81,6 +93,7 @@
 
         #botaoIniciar {
             background: #2196f3;
+
             color: white;
 
             border: 2px solid #1976d2;
@@ -90,6 +103,7 @@
 
         #botaoIniciar:hover {
             background: #1976d2;
+
             transform: translateY(-2px);
         }
 
@@ -97,6 +111,7 @@
         #botaoSalvar,
         #botaoEditar {
             background: white;
+
             color: #1976d2;
 
             border: 2px solid #2196f3;
@@ -168,11 +183,13 @@
 
         .data {
             font-size: 12px;
+
             color: #777;
         }
 
         .tempo-sessao {
             font-size: 15px;
+
             font-weight: bold;
         }
 
@@ -214,6 +231,7 @@
 
         #semHistorico {
             color: #777;
+
             font-size: 14px;
         }
 
@@ -223,6 +241,7 @@
             position: fixed;
 
             right: 200px;
+
             bottom: 200px;
 
             background: white;
@@ -288,6 +307,7 @@
 
         .total-geral .nome-categoria {
             font-weight: bold;
+
             color: #1976d2;
         }
 
@@ -350,6 +370,7 @@
 
         .botoes-popup {
             display: flex;
+
             gap: 10px;
         }
 
@@ -574,6 +595,7 @@
 
             <h1>Cronômetro</h1>
 
+
             <div id="cronometro">
                 00:00:00
             </div>
@@ -609,11 +631,14 @@
 
                 <h2>Histórico</h2>
 
+
                 <p id="semHistorico">
                     Nenhuma sessão salva.
                 </p>
 
+
                 <ul id="listaHistorico"></ul>
+
 
                 <button id="botaoLimpar">
                     Limpar histórico
@@ -727,11 +752,13 @@
                 Escolha o tipo de estudo desta sessão.
             </p>
 
+
             <div class="campo-popup">
 
                 <label>
                     Tipo de estudo
                 </label>
+
 
                 <div class="opcoes-categoria">
 
@@ -802,6 +829,7 @@
                     Tempo de estudo
                 </label>
 
+
                 <input
                     type="text"
                     id="tempoManual"
@@ -811,9 +839,13 @@
 
 
                 <p class="ajuda-tempo">
+
                     Exemplo: 233 → 00:02:33
+
                     <br>
+
                     2330000 → 233:00:00
+
                 </p>
 
             </div>
@@ -1116,6 +1148,14 @@
                 "none";
 
 
+            /*
+                Depois de salvar a sessão,
+                o cronômetro é zerado.
+            */
+
+            zerar();
+
+
             mostrarHistorico();
         }
 
@@ -1350,6 +1390,8 @@
 
         function abrirTempoManual() {
 
+            numerosDigitados = "";
+
             tempoManual.value =
                 "00:00:00";
 
@@ -1419,12 +1461,6 @@
         }
 
 
-        /*
-            Guarda somente os números
-            para que a próxima digitação
-            continue funcionando como máscara.
-        */
-
         let numerosDigitados = "";
 
 
@@ -1439,12 +1475,6 @@
                     );
 
 
-                /*
-                    Remove zeros extras
-                    apenas para facilitar
-                    a entrada de novos números.
-                */
-
                 numerosDigitados =
                     numerosDigitados.replace(
                         /^0+(?=\d)/,
@@ -1458,11 +1488,6 @@
                     );
 
 
-                /*
-                    Coloca o cursor sempre
-                    no final do campo.
-                */
-
                 tempoManual.selectionStart =
                     tempoManual.value.length;
 
@@ -1471,11 +1496,6 @@
             }
         );
 
-
-        /*
-            Quando o usuário apaga,
-            zeramos a máscara.
-        */
 
         tempoManual.addEventListener(
             "keydown",
@@ -1621,6 +1641,14 @@
 
             popupManual.style.display =
                 "none";
+
+
+            /*
+                Depois de registrar o tempo manual,
+                o cronômetro também é zerado.
+            */
+
+            zerar();
 
 
             mostrarHistorico();
