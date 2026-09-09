@@ -214,6 +214,11 @@ button {
     border-top: 2px solid #bbdefb;
 }
 
+.total-geral span,
+.total-hoje span {
+    display: block;
+}
+
 .total-geral .nome-categoria {
     font-weight: bold;
     color: #1976d2;
@@ -221,6 +226,21 @@ button {
 
 .total-geral .tempo-categoria {
     font-size: 28px;
+}
+
+.total-hoje {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #bbdefb;
+}
+
+.total-hoje .nome-categoria {
+    font-weight: bold;
+    color: #1976d2;
+}
+
+.total-hoje .tempo-categoria {
+    font-size: 24px;
 }
 
 /* POPUPS */
@@ -316,14 +336,6 @@ button {
 #tempoManual:focus {
     border-color: #2196f3;
     box-shadow: 0 0 0 3px rgba(33, 150, 243, .1);
-}
-
-.ajuda-tempo {
-    text-align: center;
-    color: #777;
-    font-size: 13px;
-    margin-top: 8px;
-    margin-bottom: 0 !important;
 }
 
 .opcoes-categoria {

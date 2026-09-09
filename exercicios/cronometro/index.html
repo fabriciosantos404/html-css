@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
@@ -6,192 +7,202 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>00:00:00 | Cronômetro</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 
-    <link rel="icon" href="https://em-content.zobj.net/source/microsoft-teams/363/skull_1f480.png">
+<link rel="icon" href="https://em-content.zobj.net/source/microsoft-teams/363/skull_1f480.png">
 
 </head>
 
 <body>
 
-    <div class="layout">
+<div class="layout">
 
-        <div class="container">
+    <div class="container">
 
-            <h1>Cronômetro</h1>
+        <h1>Cronômetro</h1>
 
-            <div id="cronometro">00:00:00</div>
+        <div id="cronometro">00:00:00</div>
 
-            <div class="botoes">
-                <button id="botaoIniciar">Iniciar</button>
-                <button id="botaoSalvar">Salvar sessão</button>
-                <button id="botaoEditar">Registrar tempo manual</button>
-                <button id="botaoZerar">Zerar</button>
-            </div>
-
-            <div class="historico">
-
-                <h2>Histórico</h2>
-
-                <p id="semHistorico">Nenhuma sessão salva.</p>
-
-                <ul id="listaHistorico"></ul>
-
-                <button id="botaoLimpar">Limpar histórico</button>
-
-            </div>
-
+        <div class="botoes">
+            <button id="botaoIniciar">Iniciar</button>
+            <button id="botaoSalvar">Salvar sessão</button>
+            <button id="botaoEditar">Registrar tempo manual</button>
+            <button id="botaoZerar">Zerar</button>
         </div>
 
-        <div class="resumo">
+        <div class="historico">
 
-            <h2>Resumo dos estudos</h2>
+            <h2>Histórico</h2>
 
-            <div id="resumoCategorias"></div>
+            <p id="semHistorico">Nenhuma sessão salva.</p>
 
-            <div class="total-geral">
-                <span class="nome-categoria">Total geral</span>
+            <ul id="listaHistorico"></ul>
 
-                <span
-                    class="tempo-categoria"
-                    id="totalGeral">
-                    00:00:00
-                </span>
-            </div>
+            <button id="botaoLimpar">Limpar histórico</button>
 
         </div>
 
     </div>
 
+    <div class="resumo">
 
-    <!-- POPUP DE CONFIRMAÇÃO -->
+    <h2>Resumo dos estudos</h2>
 
-    <div class="popup-fundo" id="popupFundo">
+    <div id="resumoCategorias"></div>
 
-        <div class="popup">
+    <div class="total-geral">
 
-            <h2 id="popupTitulo">Confirmar</h2>
+        <span class="nome-categoria">
+            Total geral
+        </span>
 
-            <p id="popupMensagem">
-                Deseja realmente continuar?
-            </p>
+        <span
+            class="tempo-categoria"
+            id="totalGeral">
+            00:00:00
+        </span>
 
-            <div class="botoes-popup">
+    </div>
 
-                <button id="botaoCancelar">
-                    Cancelar
-                </button>
+    <div class="total-hoje">
 
-                <button id="botaoConfirmar">
-                    Confirmar
-                </button>
+        <span class="nome-categoria">
+            Hoje
+        </span>
 
-            </div>
+        <span
+            class="tempo-categoria"
+            id="totalHoje">
+            00:00:00
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- POPUP DE CONFIRMAÇÃO -->
+
+<div class="popup-fundo" id="popupFundo">
+
+    <div class="popup">
+
+        <h2 id="popupTitulo">Confirmar</h2>
+
+        <p id="popupMensagem">
+            Deseja realmente continuar?
+        </p>
+
+        <div class="botoes-popup">
+
+            <button id="botaoCancelar">
+                Cancelar
+            </button>
+
+            <button id="botaoConfirmar">
+                Confirmar
+            </button>
 
         </div>
 
     </div>
 
+</div>
 
-    <!-- POPUP SALVAR SESSÃO -->
 
-    <div class="popup-fundo" id="popupSessao">
+<!-- POPUP SALVAR SESSÃO -->
 
-        <div class="popup">
+<div class="popup-fundo" id="popupSessao">
 
-            <h2>Salvar sessão</h2>
+    <div class="popup">
 
-            <p>Escolha o tipo de estudo desta sessão.</p>
+        <h2>Salvar sessão</h2>
 
-            <div class="campo-popup">
+        <p>Escolha o tipo de estudo desta sessão.</p>
 
-                <label>Tipo de estudo</label>
+        <div class="campo-popup">
 
-                <div
-                    class="opcoes-categoria"
-                    id="categoriasSessao">
-                </div>
+            <label>Tipo de estudo</label>
 
+            <div
+                class="opcoes-categoria"
+                id="categoriasSessao">
             </div>
 
-            <div class="botoes-formulario">
+        </div>
 
-                <button id="botaoCancelarSessao">
-                    Cancelar
-                </button>
+        <div class="botoes-formulario">
 
-                <button id="botaoSalvarSessao">
-                    Salvar
-                </button>
+            <button id="botaoCancelarSessao">
+                Cancelar
+            </button>
 
-            </div>
+            <button id="botaoSalvarSessao">
+                Salvar
+            </button>
 
         </div>
 
     </div>
 
+</div>
 
-    <!-- POPUP TEMPO MANUAL -->
 
-    <div class="popup-fundo" id="popupManual">
+<!-- POPUP TEMPO MANUAL -->
 
-        <div class="popup">
+<div class="popup-fundo" id="popupManual">
 
-            <h2>Registrar tempo</h2>
+    <div class="popup">
 
-            <p>
-                Digite o tempo usando apenas números.
-            </p>
+        <h2>Registrar tempo</h2>
 
-            <div class="campo-popup">
+        <p>
+            Digite o tempo usando apenas números.
+        </p>
 
-                <label for="tempoManual">
-                    Tempo de estudo
-                </label>
+        <div class="campo-popup">
 
-                <input
-                    type="text"
-                    id="tempoManual"
-                    value="00:00:00"
-                    inputmode="numeric"
-                    autocomplete="off">
+            <label for="tempoManual">
+                Tempo de estudo
+            </label>
 
-                <p class="ajuda-tempo">
-                    Exemplo: 233 → 00:02:33
-                    <br>
-                    2330000 → 233:00:00
-                </p>
+            <input
+                type="text"
+                id="tempoManual"
+                value="00:00:00"
+                inputmode="numeric"
+                autocomplete="off">
 
+        </div>
+
+        <div class="campo-popup">
+
+            <label>Tipo de estudo</label>
+
+            <div
+                class="opcoes-categoria"
+                id="categoriasManual">
             </div>
 
-            <div class="campo-popup">
+        </div>
 
-                <label>Tipo de estudo</label>
+        <div class="botoes-formulario">
 
-                <div
-                    class="opcoes-categoria"
-                    id="categoriasManual">
-                </div>
+            <button id="botaoCancelarManual">
+                Cancelar
+            </button>
 
-            </div>
-
-            <div class="botoes-formulario">
-
-                <button id="botaoCancelarManual">
-                    Cancelar
-                </button>
-
-                <button id="botaoSalvarManual">
-                    Registrar
-                </button>
-
-            </div>
+            <button id="botaoSalvarManual">
+                Registrar
+            </button>
 
         </div>
 
     </div>
 
-    <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
 
 </body>
 

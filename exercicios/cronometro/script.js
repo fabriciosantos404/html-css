@@ -4,7 +4,8 @@ const materias = [
     "HTML + CSS",
     "PreSecurity",
     "Python",
-    "JavaScript"
+    "JavaScript",
+    "Desenho"
 ];
 
 const CHAVE_HISTORICO = "historicoCronometro";
@@ -32,6 +33,7 @@ const botaoLimpar = $("botaoLimpar");
 const listaHistorico = $("listaHistorico");
 const semHistorico = $("semHistorico");
 const totalGeral = $("totalGeral");
+const totalHoje = $("totalHoje");
 
 const popupFundo = $("popupFundo");
 const popupTitulo = $("popupTitulo");
@@ -319,6 +321,37 @@ function atualizarResumo() {
             .reduce((soma, tempo) => soma + tempo, 0);
 
     totalGeral.textContent =
+        formatarTempo(total);
+
+    atualizarTotalHoje(dados);
+}
+
+
+/* TOTAL DE HOJE */
+
+function atualizarTotalHoje(dados) {
+
+    const hoje = new Date();
+
+    const diaHoje =
+        hoje.toLocaleDateString("pt-BR");
+
+    const total =
+        dados
+            .filter(sessao => {
+
+                const dataSessao =
+                    sessao.data.split(",")[0];
+
+                return dataSessao === diaHoje;
+
+            })
+            .reduce(
+                (soma, sessao) => soma + sessao.tempo,
+                0
+            );
+
+    totalHoje.textContent =
         formatarTempo(total);
 }
 
