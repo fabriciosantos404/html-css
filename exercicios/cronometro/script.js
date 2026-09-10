@@ -3,10 +3,10 @@
 const materias = [
     "HTML + CSS",
     "TryHackMe",
-    "Python",
     "JavaScript",
-    "Desenho",
-    "C# Unity"
+    "Python",
+    "C# Unity",
+    "Desenho"
 ];
 
 const CHAVE_HISTORICO = "historicoCronometro";
