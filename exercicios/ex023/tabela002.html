@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,13 @@
             padding: 10px;
         }
 
+        caption {
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 10px;
+            background-color: lightgray;
+        }
+
         thead, tfoot {
             background-color: gray;
             color: white;
@@ -31,6 +38,7 @@
     <!--
         ANATOMIA PARA TABELAS GRANDES
         TABLE
+            CAPTION
             THEAD
                 TR, TD, TH
             TBODY
@@ -39,10 +47,11 @@
                 TR, TD, TH
     -->
     <table>
+        <caption>Jogadores</caption>
         <thead>
             <tr>
-                <th>Nome</th>
-                <th>Classe</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Classe</th>
             </tr>
         </thead>
         <tbody>
@@ -60,8 +69,8 @@
             </tr>
         </tbody>
         <tfoot>
-            <th>XP Total</th>
-            <td>08 / 10</td>
+            <th scope="row">XP Total</th>
+            <td class="num">08 / <strong>10</strong></td>
         </tfoot>
     </table>
 </body>
