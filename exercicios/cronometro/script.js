@@ -1,12 +1,11 @@
 /* CONFIGURAÇÃO */
 
 const materias = [
-    "HTML + CSS",
     "TryHackMe",
-    "JavaScript",
     "Python",
     "C# Unity",
-    "Desenho"
+    "Desenho",
+    "DaVinci"
 ];
 
 const CHAVE_HISTORICO = "historicoCronometro";
