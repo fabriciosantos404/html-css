@@ -5,7 +5,11 @@ const materias = [
     "Python",
     "C# Unity",
     "Desenho",
-    "DaVinci"
+    "DaVinci",
+    "Html + CSS",
+    "JS/TypeScript",
+    "React",
+    "Node"
 ];
 
 const CHAVE_HISTORICO = "historicoCronometro";
