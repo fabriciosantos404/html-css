@@ -3,16 +3,15 @@
 ========================================================= */
 
 const materias = [
-    "TryHackMe",
-    "Python",
-    "C# Unity",
-    "Desenho",
-    "DaVinci",
     "Html + CSS",
     "JS/TypeScript",
-    "React",
-    "Node"
+    "TryHackMe",
+    "C# Unity",
+    "Desenho",
+    "Python",
+    "DaVinci"
 ];
+
 
 const CHAVE_HISTORICO = "historicoCronometro";
 const CHAVE_CRONOMETRO = "cronometroAtivo";
