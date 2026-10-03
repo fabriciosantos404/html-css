@@ -5,11 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>00:00:00 | Cronômetro</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-<link rel="icon" href="https://em-content.zobj.net/source/microsoft-teams/363/skull_1f480.png">
+    <link
+        rel="icon"
+        href="https://em-content.zobj.net/source/microsoft-teams/363/skull_1f480.png">
 
 </head>
 
@@ -21,73 +24,125 @@
 
         <h1>Cronômetro</h1>
 
-        <div id="cronometro">00:00:00</div>
+        <div id="cronometro">
+            00:00:00
+        </div>
 
         <div class="botoes">
-            <button id="botaoIniciar">Iniciar</button>
-            <button id="botaoSalvar">Salvar sessão</button>
-            <button id="botaoEditar">Registrar tempo manual</button>
-            <button id="botaoZerar">Zerar</button>
+
+            <button id="botaoIniciar">
+                Iniciar
+            </button>
+
+            <button id="botaoSalvar">
+                Salvar sessão
+            </button>
+
+            <button id="botaoEditar">
+                Registrar tempo manual
+            </button>
+
+            <button id="botaoZerar">
+                Zerar
+            </button>
+
         </div>
+
 
         <div class="historico">
 
             <h2>Histórico</h2>
 
-            <p id="semHistorico">Nenhuma sessão salva.</p>
+            <p id="semHistorico">
+                Nenhuma sessão salva.
+            </p>
 
             <ul id="listaHistorico"></ul>
 
-            <button id="botaoLimpar">Limpar histórico</button>
+            <button id="botaoLimpar">
+                Limpar histórico
+            </button>
 
         </div>
 
     </div>
 
+
     <div class="resumo">
 
-    <h2>Resumo dos estudos</h2>
+        <h2>Resumo dos estudos</h2>
 
-    <div id="resumoCategorias"></div>
+        <div id="resumoCategorias"></div>
 
-    <div class="total-geral">
 
-        <span class="nome-categoria">
-            Total geral
-        </span>
+        <!-- TOTAL DA SEMANA -->
 
-        <span
-            class="tempo-categoria"
-            id="totalGeral">
-            00:00:00
-        </span>
+        <div class="total-geral">
 
-    </div>
+            <span class="nome-categoria">
+                Total da Semana
+            </span>
 
-    <div class="total-hoje">
+            <span
+                class="tempo-categoria"
+                id="totalSemana">
 
-        <span class="nome-categoria">
-            Hoje
-        </span>
+                00:00:00
 
-        <span
-            class="tempo-categoria"
-            id="totalHoje">
-            00:00:00
-        </span>
+            </span>
+
+        </div>
+
+
+        <!-- TOTAL DE HOJE -->
+
+        <div class="total-hoje">
+
+            <span class="nome-categoria">
+                Hoje
+            </span>
+
+            <span
+                class="tempo-categoria"
+                id="totalHoje">
+
+                00:00:00
+
+            </span>
+
+        </div>
+
+
+        <!-- HISTÓRICO SEMANAL -->
+
+        <div class="historico-semanal">
+
+            <h3>
+                Histórico semanal
+            </h3>
+
+            <div id="historicoSemanal"></div>
+
+        </div>
 
     </div>
 
 </div>
 
 
-<!-- POPUP DE CONFIRMAÇÃO -->
+<!-- =========================================================
+     POPUP DE CONFIRMAÇÃO
+========================================================= -->
 
-<div class="popup-fundo" id="popupFundo">
+<div
+    class="popup-fundo"
+    id="popupFundo">
 
     <div class="popup">
 
-        <h2 id="popupTitulo">Confirmar</h2>
+        <h2 id="popupTitulo">
+            Confirmar
+        </h2>
 
         <p id="popupMensagem">
             Deseja realmente continuar?
@@ -110,19 +165,29 @@
 </div>
 
 
-<!-- POPUP SALVAR SESSÃO -->
+<!-- =========================================================
+     POPUP SALVAR SESSÃO
+========================================================= -->
 
-<div class="popup-fundo" id="popupSessao">
+<div
+    class="popup-fundo"
+    id="popupSessao">
 
     <div class="popup">
 
-        <h2>Salvar sessão</h2>
+        <h2>
+            Salvar sessão
+        </h2>
 
-        <p>Escolha o tipo de estudo desta sessão.</p>
+        <p>
+            Escolha o tipo de estudo desta sessão.
+        </p>
 
         <div class="campo-popup">
 
-            <label>Tipo de estudo</label>
+            <label>
+                Tipo de estudo
+            </label>
 
             <div
                 class="opcoes-categoria"
@@ -148,13 +213,19 @@
 </div>
 
 
-<!-- POPUP TEMPO MANUAL -->
+<!-- =========================================================
+     POPUP TEMPO MANUAL
+========================================================= -->
 
-<div class="popup-fundo" id="popupManual">
+<div
+    class="popup-fundo"
+    id="popupManual">
 
     <div class="popup">
 
-        <h2>Registrar tempo</h2>
+        <h2>
+            Registrar tempo
+        </h2>
 
         <p>
             Digite o tempo usando apenas números.
@@ -177,7 +248,9 @@
 
         <div class="campo-popup">
 
-            <label>Tipo de estudo</label>
+            <label>
+                Tipo de estudo
+            </label>
 
             <div
                 class="opcoes-categoria"
@@ -201,6 +274,7 @@
     </div>
 
 </div>
+
 
 <script src="script.js"></script>
 

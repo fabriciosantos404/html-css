@@ -3,6 +3,7 @@
 ========================================================= */
 
 const materias = [
+
     "Html + CSS",
     "JS/TypeScript",
     "TryHackMe",
@@ -10,11 +11,15 @@ const materias = [
     "Desenho",
     "Python",
     "DaVinci"
+
 ];
 
 
-const CHAVE_HISTORICO = "historicoCronometro";
-const CHAVE_CRONOMETRO = "cronometroAtivo";
+const CHAVE_HISTORICO =
+    "historicoCronometro";
+
+const CHAVE_CRONOMETRO =
+    "cronometroAtivo";
 
 
 /* =========================================================
@@ -22,8 +27,11 @@ const CHAVE_CRONOMETRO = "cronometroAtivo";
 ========================================================= */
 
 let segundos = 0;
+
 let intervalo = null;
+
 let rodando = false;
+
 let acaoConfirmacao = null;
 
 
@@ -31,36 +39,90 @@ let acaoConfirmacao = null;
    ELEMENTOS
 ========================================================= */
 
-const $ = id => document.getElementById(id);
+const $ = id =>
+    document.getElementById(id);
 
-const cronometro = $("cronometro");
-const botaoIniciar = $("botaoIniciar");
-const botaoZerar = $("botaoZerar");
-const botaoSalvar = $("botaoSalvar");
-const botaoEditar = $("botaoEditar");
-const botaoLimpar = $("botaoLimpar");
 
-const listaHistorico = $("listaHistorico");
-const semHistorico = $("semHistorico");
-const totalGeral = $("totalGeral");
-const totalHoje = $("totalHoje");
+const cronometro =
+    $("cronometro");
 
-const popupFundo = $("popupFundo");
-const popupTitulo = $("popupTitulo");
-const popupMensagem = $("popupMensagem");
-const botaoCancelar = $("botaoCancelar");
-const botaoConfirmar = $("botaoConfirmar");
+const botaoIniciar =
+    $("botaoIniciar");
 
-const popupSessao = $("popupSessao");
-const categoriasSessao = $("categoriasSessao");
-const botaoCancelarSessao = $("botaoCancelarSessao");
-const botaoSalvarSessao = $("botaoSalvarSessao");
+const botaoZerar =
+    $("botaoZerar");
 
-const popupManual = $("popupManual");
-const categoriasManual = $("categoriasManual");
-const tempoManual = $("tempoManual");
-const botaoCancelarManual = $("botaoCancelarManual");
-const botaoSalvarManual = $("botaoSalvarManual");
+const botaoSalvar =
+    $("botaoSalvar");
+
+const botaoEditar =
+    $("botaoEditar");
+
+const botaoLimpar =
+    $("botaoLimpar");
+
+
+const listaHistorico =
+    $("listaHistorico");
+
+const semHistorico =
+    $("semHistorico");
+
+
+const totalSemana =
+    $("totalSemana");
+
+const totalHoje =
+    $("totalHoje");
+
+
+const historicoSemanal =
+    $("historicoSemanal");
+
+
+const popupFundo =
+    $("popupFundo");
+
+const popupTitulo =
+    $("popupTitulo");
+
+const popupMensagem =
+    $("popupMensagem");
+
+const botaoCancelar =
+    $("botaoCancelar");
+
+const botaoConfirmar =
+    $("botaoConfirmar");
+
+
+const popupSessao =
+    $("popupSessao");
+
+const categoriasSessao =
+    $("categoriasSessao");
+
+const botaoCancelarSessao =
+    $("botaoCancelarSessao");
+
+const botaoSalvarSessao =
+    $("botaoSalvarSessao");
+
+
+const popupManual =
+    $("popupManual");
+
+const categoriasManual =
+    $("categoriasManual");
+
+const tempoManual =
+    $("tempoManual");
+
+const botaoCancelarManual =
+    $("botaoCancelarManual");
+
+const botaoSalvarManual =
+    $("botaoSalvarManual");
 
 
 /* =========================================================
@@ -72,7 +134,9 @@ function historico() {
     try {
 
         return JSON.parse(
-            localStorage.getItem(CHAVE_HISTORICO)
+            localStorage.getItem(
+                CHAVE_HISTORICO
+            )
         ) || [];
 
     } catch (erro) {
@@ -83,7 +147,9 @@ function historico() {
         );
 
         return [];
+
     }
+
 }
 
 
@@ -91,26 +157,43 @@ function historico() {
    MATÉRIAS
 ========================================================= */
 
-function criarCategorias(container, nome) {
+function criarCategorias(
+    container,
+    nome
+) {
 
-    container.innerHTML = materias.map(
-        (materia, index) => `
-            <label class="opcao-categoria">
-                <input
-                    type="radio"
-                    name="${nome}"
-                    value="${materia}"
-                    ${index === 0 ? "checked" : ""}>
-                ${materia}
-            </label>
-        `
-    ).join("");
+    container.innerHTML =
+        materias
+            .map(
+                (materia, index) => `
+
+                    <label
+                        class="opcao-categoria">
+
+                        <input
+                            type="radio"
+                            name="${nome}"
+                            value="${materia}"
+                            ${index === 0
+                                ? "checked"
+                                : ""}>
+
+                        ${materia}
+
+                    </label>
+
+                `
+            )
+            .join("");
+
 }
+
 
 criarCategorias(
     categoriasSessao,
     "categoria"
 );
+
 
 criarCategorias(
     categoriasManual,
@@ -124,37 +207,58 @@ criarCategorias(
 
 function formatarTempo(total) {
 
-    total = Math.max(
-        0,
-        Math.floor(total)
-    );
+    total =
+        Math.max(
+            0,
+            Math.floor(total)
+        );
+
 
     const horas =
-        Math.floor(total / 3600);
+        Math.floor(
+            total / 3600
+        );
+
 
     const minutos =
         Math.floor(
             (total % 3600) / 60
         );
 
+
     const segundos =
         total % 60;
 
+
     return [
-        String(horas).padStart(2, "0"),
-        String(minutos).padStart(2, "0"),
-        String(segundos).padStart(2, "0")
+
+        String(horas)
+            .padStart(2, "0"),
+
+        String(minutos)
+            .padStart(2, "0"),
+
+        String(segundos)
+            .padStart(2, "0")
+
     ].join(":");
+
 }
 
+
+/* =========================================================
+   ATUALIZAR TELA
+========================================================= */
 
 function atualizarTela() {
 
     cronometro.textContent =
         formatarTempo(segundos);
 
+
     document.title =
         `${formatarTempo(segundos)} | Cronômetro`;
+
 }
 
 
@@ -163,7 +267,8 @@ function atualizarTela() {
 ========================================================= */
 
 /*
-    O cronômetro salvo tem apenas o tempo acumulado.
+    O cronômetro salvo possui apenas
+    o tempo acumulado.
 
     Exemplo:
 
@@ -171,21 +276,23 @@ function atualizarTela() {
         segundos: 1837
     }
 
-    Não salvamos o horário de início.
-
-    Isso é importante porque, se o PC for desligado,
-    o tempo NÃO continuará correndo enquanto estiver fechado.
+    O tempo não continua correndo
+    quando o navegador está fechado.
 */
 
 
 function salvarEstadoCronometro() {
 
     localStorage.setItem(
+
         CHAVE_CRONOMETRO,
+
         JSON.stringify({
             segundos
         })
+
     );
+
 }
 
 
@@ -200,6 +307,7 @@ function carregarEstadoCronometro() {
                 )
             );
 
+
         if (
             salvo &&
             typeof salvo.segundos === "number"
@@ -212,6 +320,7 @@ function carregarEstadoCronometro() {
                         salvo.segundos
                     )
                 );
+
         }
 
     } catch (erro) {
@@ -222,7 +331,9 @@ function carregarEstadoCronometro() {
         );
 
         segundos = 0;
+
     }
+
 }
 
 
@@ -231,6 +342,7 @@ function apagarEstadoCronometro() {
     localStorage.removeItem(
         CHAVE_CRONOMETRO
     );
+
 }
 
 
@@ -246,22 +358,23 @@ function iniciarPausar() {
 
     if (rodando) {
 
-        clearInterval(intervalo);
+        clearInterval(
+            intervalo
+        );
 
         intervalo = null;
 
         rodando = false;
 
-        /*
-            Salva imediatamente o tempo atual.
-        */
 
         salvarEstadoCronometro();
+
 
         botaoIniciar.textContent =
             "Iniciar";
 
         return;
+
     }
 
 
@@ -271,40 +384,40 @@ function iniciarPausar() {
 
     rodando = true;
 
+
     botaoIniciar.textContent =
         "Pausar";
 
 
-    /*
-        Atualiza o cronômetro a cada segundo.
-    */
+    intervalo =
+        setInterval(
 
-    intervalo = setInterval(
-        () => {
+            () => {
 
-            segundos++;
+                segundos++;
 
-            atualizarTela();
+                atualizarTela();
 
-            /*
-                Salva automaticamente a cada segundo.
+                salvarEstadoCronometro();
 
-                Assim, se o PC desligar ou o navegador
-                fechar inesperadamente, perdemos no máximo
-                aproximadamente 1 segundo.
-            */
+            },
 
-            salvarEstadoCronometro();
+            1000
 
-        },
-        1000
-    );
+        );
+
 }
 
 
+/* =========================================================
+   ZERAR CRONÔMETRO
+========================================================= */
+
 function zerar() {
 
-    clearInterval(intervalo);
+    clearInterval(
+        intervalo
+    );
 
     intervalo = null;
 
@@ -312,12 +425,16 @@ function zerar() {
 
     rodando = false;
 
+
     apagarEstadoCronometro();
+
 
     botaoIniciar.textContent =
         "Iniciar";
 
+
     atualizarTela();
+
 }
 
 
@@ -329,24 +446,23 @@ function recuperarCronometro() {
 
     carregarEstadoCronometro();
 
+
     /*
-        IMPORTANTE:
-
-        Mesmo que o cronômetro estivesse rodando
-        antes de fechar o navegador, ele NÃO volta
+        O cronômetro não volta
         rodando automaticamente.
-
-        O usuário precisa clicar em "Iniciar".
     */
 
     rodando = false;
 
     intervalo = null;
 
+
     botaoIniciar.textContent =
         "Iniciar";
 
+
     atualizarTela();
+
 }
 
 
@@ -359,37 +475,51 @@ function abrirPopupSessao() {
     if (!segundos) {
 
         abrirPopup(
+
             "Cronômetro zerado",
+
             "Não é possível salvar uma sessão com tempo 00:00:00.",
+
             null,
+
             "Fechar"
+
         );
 
         return;
+
     }
 
+
     /*
-        Se o usuário clicar em salvar enquanto
-        o cronômetro estiver rodando, primeiro
-        atualizamos o estado salvo.
+        Se estiver rodando,
+        primeiro paramos e salvamos
+        o estado atual.
     */
 
     if (rodando) {
 
-        clearInterval(intervalo);
+        clearInterval(
+            intervalo
+        );
 
         intervalo = null;
 
         rodando = false;
 
+
         salvarEstadoCronometro();
+
 
         botaoIniciar.textContent =
             "Iniciar";
+
     }
+
 
     popupSessao.style.display =
         "flex";
+
 }
 
 
@@ -400,12 +530,16 @@ function salvarSessao() {
         segundos
     );
 
+
     popupSessao.style.display =
         "none";
 
+
     zerar();
 
+
     mostrarHistorico();
+
 }
 
 
@@ -418,29 +552,44 @@ function salvarTempoManual() {
     const tempo =
         converterTempo();
 
+
     if (tempo === null) {
 
         abrirPopup(
+
             "Tempo inválido",
+
             "Digite um tempo válido.",
+
             null,
+
             "Fechar"
+
         );
 
         return;
+
     }
+
 
     salvarRegistro(
         "categoriaManual",
         tempo
     );
 
+
     popupManual.style.display =
         "none";
 
+
     mostrarHistorico();
+
 }
 
+
+/* =========================================================
+   SALVAR REGISTRO
+========================================================= */
 
 function salvarRegistro(
     nomeCategoria,
@@ -452,6 +601,7 @@ function salvarRegistro(
             `input[name="${nomeCategoria}"]:checked`
         );
 
+
     if (!elemento) {
 
         console.error(
@@ -459,24 +609,152 @@ function salvarRegistro(
         );
 
         return;
+
     }
+
 
     const categoria =
         elemento.value;
 
+
     const dados =
         historico();
 
+
     dados.push({
+
         tempo,
+
         categoria,
-        data: new Date().toLocaleString("pt-BR")
+
+        /*
+            Agora salvamos em ISO.
+            Isso facilita o cálculo
+            das semanas.
+        */
+
+        data:
+            new Date().toISOString()
+
     });
 
+
     localStorage.setItem(
+
         CHAVE_HISTORICO,
+
         JSON.stringify(dados)
+
     );
+
+}
+
+
+/* =========================================================
+   CONVERTER DATA DA SESSÃO
+========================================================= */
+
+/*
+    Esta função aceita:
+
+    1. Datas novas em ISO:
+
+       2026-10-02T23:30:00.000Z
+
+    2. Datas antigas salvas pelo
+       código anterior:
+
+       02/10/2026, 20:30:00
+*/
+
+
+function obterDataSessao(sessao) {
+
+    if (!sessao.data) {
+        return null;
+    }
+
+
+    /*
+        Tenta primeiro o formato ISO.
+    */
+
+    const dataISO =
+        new Date(sessao.data);
+
+
+    if (!isNaN(dataISO.getTime())) {
+
+        /*
+            Cuidado:
+
+            Datas ISO com "Z" representam UTC.
+            new Date() converte automaticamente
+            para o horário local quando necessário.
+        */
+
+        return dataISO;
+
+    }
+
+
+    /*
+        Tenta o formato antigo:
+
+        DD/MM/YYYY, HH:MM:SS
+    */
+
+    const partes =
+        sessao.data.split(",");
+
+
+    const dataParte =
+        partes[0];
+
+
+    const horaParte =
+        partes[1] || "00:00:00";
+
+
+    const [dia, mes, ano] =
+        dataParte
+            .split("/")
+            .map(Number);
+
+
+    const [
+        hora,
+        minuto,
+        segundo
+    ] =
+        horaParte
+            .trim()
+            .split(":")
+            .map(Number);
+
+
+    const data =
+        new Date(
+
+            ano,
+
+            mes - 1,
+
+            dia,
+
+            hora || 0,
+
+            minuto || 0,
+
+            segundo || 0
+
+        );
+
+
+    return isNaN(data.getTime())
+        ? null
+        : data;
+
 }
 
 
@@ -489,13 +767,16 @@ function mostrarHistorico() {
     const dados =
         historico();
 
+
     listaHistorico.innerHTML =
         "";
+
 
     semHistorico.style.display =
         dados.length
             ? "none"
             : "block";
+
 
     botaoLimpar.style.display =
         dados.length
@@ -504,13 +785,19 @@ function mostrarHistorico() {
 
 
     dados.forEach(
+
         (sessao, index) => {
 
             const item =
-                document.createElement("li");
+                document.createElement(
+                    "li"
+                );
+
 
             item.innerHTML = `
-                <div class="informacao-sessao">
+
+                <div
+                    class="informacao-sessao">
 
                     <span class="categoria">
                         ${sessao.categoria}
@@ -523,7 +810,9 @@ function mostrarHistorico() {
                     </span>
 
                     <span class="data">
-                        ${sessao.data}
+                        ${formatarDataHistorico(
+                            sessao
+                        )}
                     </span>
 
                 </div>
@@ -531,15 +820,49 @@ function mostrarHistorico() {
                 <button
                     class="botaoExcluir"
                     onclick="excluirSessao(${index})">
+
                     Excluir
+
                 </button>
+
             `;
 
-            listaHistorico.appendChild(item);
+
+            listaHistorico.appendChild(
+                item
+            );
+
         }
+
     );
 
+
     atualizarResumo();
+
+}
+
+
+/* =========================================================
+   FORMATAR DATA DO HISTÓRICO
+========================================================= */
+
+function formatarDataHistorico(
+    sessao
+) {
+
+    const data =
+        obterDataSessao(sessao);
+
+
+    if (!data) {
+        return "Data inválida";
+    }
+
+
+    return data.toLocaleString(
+        "pt-BR"
+    );
+
 }
 
 
@@ -552,68 +875,479 @@ function atualizarResumo() {
     const dados =
         historico();
 
+
     const totais =
         Object.fromEntries(
+
             materias.map(
+
                 materia => [
+
                     materia,
+
                     0
+
                 ]
+
             )
+
         );
 
 
+    /*
+        Total por matéria.
+
+        Continua considerando
+        todo o histórico.
+    */
+
     dados.forEach(
+
         sessao => {
 
             if (
-                totais[sessao.categoria]
-                !== undefined
+                totais[
+                    sessao.categoria
+                ] !== undefined
             ) {
 
-                totais[sessao.categoria]
-                    += sessao.tempo;
+                totais[
+                    sessao.categoria
+                ] += sessao.tempo;
+
             }
+
         }
+
     );
 
 
     const resumo =
         $("resumoCategorias");
 
+
     resumo.innerHTML =
-        materias.map(
-            materia => `
-                <div class="categoria-resumo">
 
-                    <span class="nome-categoria">
-                        ${materia}
-                    </span>
+        materias
 
-                    <span class="tempo-categoria">
-                        ${formatarTempo(
-                            totais[materia]
-                        )}
-                    </span>
+            .map(
 
-                </div>
-            `
-        ).join("");
+                materia => `
+
+                    <div
+                        class="categoria-resumo">
+
+                        <span
+                            class="nome-categoria">
+
+                            ${materia}
+
+                        </span>
+
+                        <span
+                            class="tempo-categoria">
+
+                            ${formatarTempo(
+                                totais[materia]
+                            )}
+
+                        </span>
+
+                    </div>
+
+                `
+
+            )
+
+            .join("");
+
+
+    /*
+        Agora não calculamos mais
+        "Total geral".
+
+        Calculamos:
+
+        - Total da semana
+        - Histórico semanal
+        - Total de hoje
+    */
+
+    atualizarTotalSemana(
+        dados
+    );
+
+
+    atualizarHistoricoSemanal(
+        dados
+    );
+
+
+    atualizarTotalHoje(
+        dados
+    );
+
+}
+
+
+/* =========================================================
+   INÍCIO DA SEMANA
+========================================================= */
+
+/*
+    Semana começa no DOMINGO.
+
+    getDay():
+
+    Domingo  = 0
+    Segunda  = 1
+    Terça    = 2
+    Quarta   = 3
+    Quinta   = 4
+    Sexta    = 5
+    Sábado   = 6
+*/
+
+
+function obterInicioSemana(
+    data
+) {
+
+    const inicio =
+        new Date(data);
+
+
+    inicio.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    const dia =
+        inicio.getDay();
+
+
+    /*
+        Voltamos "dia" dias.
+
+        Se hoje for:
+
+        Domingo:
+        0 dias
+
+        Segunda:
+        1 dia
+
+        Terça:
+        2 dias
+
+        etc.
+    */
+
+    inicio.setDate(
+
+        inicio.getDate() - dia
+
+    );
+
+
+    return inicio;
+
+}
+
+
+/* =========================================================
+   FIM DA SEMANA
+========================================================= */
+
+function obterFimSemana(
+    data
+) {
+
+    const inicio =
+        obterInicioSemana(
+            data
+        );
+
+
+    const fim =
+        new Date(inicio);
+
+
+    /*
+        Domingo + 6 dias = sábado
+    */
+
+    fim.setDate(
+        fim.getDate() + 6
+    );
+
+
+    fim.setHours(
+        23,
+        59,
+        59,
+        999
+    );
+
+
+    return fim;
+
+}
+
+
+/* =========================================================
+   TOTAL DA SEMANA
+========================================================= */
+
+function atualizarTotalSemana(
+    dados
+) {
+
+    const agora =
+        new Date();
+
+
+    const inicioSemana =
+        obterInicioSemana(
+            agora
+        );
+
+
+    const fimSemana =
+        obterFimSemana(
+            agora
+        );
 
 
     const total =
-        Object.values(totais)
+
+        dados
+
+            .filter(
+
+                sessao => {
+
+                    const dataSessao =
+                        obterDataSessao(
+                            sessao
+                        );
+
+
+                    if (!dataSessao) {
+                        return false;
+                    }
+
+
+                    return (
+
+                        dataSessao >=
+                            inicioSemana &&
+
+                        dataSessao <=
+                            fimSemana
+
+                    );
+
+                }
+
+            )
+
             .reduce(
-                (soma, tempo) =>
-                    soma + tempo,
+
+                (soma, sessao) =>
+
+                    soma + sessao.tempo,
+
                 0
+
             );
 
 
-    totalGeral.textContent =
+    totalSemana.textContent =
         formatarTempo(total);
 
-    atualizarTotalHoje(dados);
+}
+
+
+/* =========================================================
+   HISTÓRICO SEMANAL
+========================================================= */
+
+function atualizarHistoricoSemanal(
+    dados
+) {
+
+    const semanas = {};
+
+
+    /*
+        Agrupamos todas as sessões
+        pelo domingo correspondente.
+    */
+
+    dados.forEach(
+
+        sessao => {
+
+            const dataSessao =
+                obterDataSessao(
+                    sessao
+                );
+
+
+            if (!dataSessao) {
+                return;
+            }
+
+
+            const inicioSemana =
+                obterInicioSemana(
+                    dataSessao
+                );
+
+
+            /*
+                A data do domingo será
+                usada como identificador
+                daquela semana.
+            */
+
+            const chave =
+                inicioSemana.toISOString();
+
+
+            if (!semanas[chave]) {
+
+                semanas[chave] = {
+
+                    inicio:
+                        inicioSemana,
+
+                    total: 0
+
+                };
+
+            }
+
+
+            semanas[chave].total +=
+                sessao.tempo;
+
+        }
+
+    );
+
+
+    /*
+        Ordena da semana mais recente
+        para a mais antiga.
+    */
+
+    const semanasOrdenadas =
+
+        Object.values(
+            semanas
+        )
+
+        .sort(
+
+            (a, b) =>
+                b.inicio - a.inicio
+
+        );
+
+
+    historicoSemanal.innerHTML =
+        "";
+
+
+    /*
+        Se ainda não existir nenhuma semana.
+    */
+
+    if (
+        semanasOrdenadas.length === 0
+    ) {
+
+        historicoSemanal.innerHTML = `
+
+            <p>
+                Nenhuma semana registrada.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    semanasOrdenadas.forEach(
+
+        semana => {
+
+            const fimSemana =
+                obterFimSemana(
+                    semana.inicio
+                );
+
+
+            const inicioFormatado =
+                semana.inicio.toLocaleDateString(
+                    "pt-BR"
+                );
+
+
+            const fimFormatado =
+                fimSemana.toLocaleDateString(
+                    "pt-BR"
+                );
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "semana-resumo";
+
+
+            item.innerHTML = `
+
+                <span>
+
+                    ${inicioFormatado}
+
+                    -
+
+                    ${fimFormatado}
+
+                </span>
+
+                <strong>
+
+                    ${formatarTempo(
+                        semana.total
+                    )}
+
+                </strong>
+
+            `;
+
+
+            historicoSemanal.appendChild(
+                item
+            );
+
+        }
+
+    );
+
 }
 
 
@@ -621,40 +1355,68 @@ function atualizarResumo() {
    TOTAL DE HOJE
 ========================================================= */
 
-function atualizarTotalHoje(dados) {
+function atualizarTotalHoje(
+    dados
+) {
 
     const hoje =
         new Date();
 
-    const diaHoje =
-        hoje.toLocaleDateString(
-            "pt-BR"
-        );
-
 
     const total =
+
         dados
+
             .filter(
+
                 sessao => {
 
                     const dataSessao =
-                        sessao.data.split(",")[0];
+                        obterDataSessao(
+                            sessao
+                        );
+
+
+                    if (!dataSessao) {
+                        return false;
+                    }
+
 
                     return (
-                        dataSessao ===
-                        diaHoje
+
+                        dataSessao.getFullYear() ===
+                            hoje.getFullYear()
+
+                        &&
+
+                        dataSessao.getMonth() ===
+                            hoje.getMonth()
+
+                        &&
+
+                        dataSessao.getDate() ===
+                            hoje.getDate()
+
                     );
+
                 }
+
             )
+
             .reduce(
+
                 (soma, sessao) =>
+
                     soma + sessao.tempo,
+
                 0
+
             );
 
 
     totalHoje.textContent =
         formatarTempo(total);
+
 }
 
 
@@ -663,26 +1425,36 @@ function atualizarTotalHoje(dados) {
 ========================================================= */
 
 function abrirPopup(
+
     titulo,
+
     mensagem,
+
     acao,
+
     textoBotao
+
 ) {
 
     popupTitulo.textContent =
         titulo;
 
+
     popupMensagem.textContent =
         mensagem;
+
 
     botaoConfirmar.textContent =
         textoBotao;
 
+
     acaoConfirmacao =
         acao;
 
+
     popupFundo.style.display =
         "flex";
+
 }
 
 
@@ -691,8 +1463,10 @@ function fecharPopup() {
     popupFundo.style.display =
         "none";
 
+
     acaoConfirmacao =
         null;
+
 }
 
 
@@ -700,13 +1474,17 @@ function fecharPopup() {
    EXCLUIR SESSÃO
 ========================================================= */
 
-function excluirSessao(index) {
+function excluirSessao(
+    index
+) {
 
     const dados =
         historico();
 
+
     const sessao =
         dados[index];
+
 
     if (!sessao) {
         return;
@@ -714,8 +1492,11 @@ function excluirSessao(index) {
 
 
     abrirPopup(
+
         "Excluir sessão?",
+
         `Deseja realmente excluir a sessão de ${formatarTempo(sessao.tempo)} de ${sessao.categoria}?`,
+
         () => {
 
             dados.splice(
@@ -723,15 +1504,24 @@ function excluirSessao(index) {
                 1
             );
 
+
             localStorage.setItem(
+
                 CHAVE_HISTORICO,
+
                 JSON.stringify(dados)
+
             );
 
+
             mostrarHistorico();
+
         },
+
         "Excluir"
+
     );
+
 }
 
 
@@ -742,18 +1532,26 @@ function excluirSessao(index) {
 function limparHistorico() {
 
     abrirPopup(
+
         "Apagar histórico?",
+
         "Deseja realmente apagar TODO o histórico? Essa ação não poderá ser desfeita.",
+
         () => {
 
             localStorage.removeItem(
                 CHAVE_HISTORICO
             );
 
+
             mostrarHistorico();
+
         },
+
         "Apagar tudo"
+
     );
+
 }
 
 
@@ -766,22 +1564,29 @@ function abrirTempoManual() {
     tempoManual.value =
         "00:00:00";
 
+
     popupManual.style.display =
         "flex";
 
+
     tempoManual.focus();
 
+
     tempoManual.select();
+
 }
 
 
-function formatarEntradaTempo(numeros) {
+function formatarEntradaTempo(
+    numeros
+) {
 
     numeros =
         numeros.replace(
             /\D/g,
             ""
         );
+
 
     numeros =
         numeros.replace(
@@ -791,7 +1596,9 @@ function formatarEntradaTempo(numeros) {
 
 
     if (!numeros) {
+
         return "00:00:00";
+
     }
 
 
@@ -805,25 +1612,53 @@ function formatarEntradaTempo(numeros) {
     const segundos =
         numeros.slice(-2);
 
+
     const minutos =
-        numeros.slice(-4, -2);
+        numeros.slice(
+            -4,
+            -2
+        );
+
 
     const horas =
-        numeros.slice(0, -4);
+        numeros.slice(
+            0,
+            -4
+        );
 
 
     return (
-        horas.padStart(2, "0") +
-        ":" +
-        minutos +
-        ":" +
+
+        horas.padStart(
+            2,
+            "0"
+        )
+
+        +
+
+        ":"
+
+        +
+
+        minutos
+
+        +
+
+        ":"
+
+        +
+
         segundos
+
     );
+
 }
 
 
 tempoManual.addEventListener(
+
     "input",
+
     () => {
 
         const numeros =
@@ -843,9 +1678,12 @@ tempoManual.addEventListener(
         tempoManual.selectionStart =
             tempoManual.value.length;
 
+
         tempoManual.selectionEnd =
             tempoManual.value.length;
+
     }
+
 );
 
 
@@ -855,39 +1693,59 @@ function converterTempo() {
         tempoManual.value.split(":");
 
 
-    if (partes.length !== 3) {
+    if (
+        partes.length !== 3
+    ) {
+
         return null;
+
     }
 
 
     const horas =
-        Number(partes[0]) || 0;
+        Number(
+            partes[0]
+        ) || 0;
+
 
     const minutos =
-        Number(partes[1]) || 0;
+        Number(
+            partes[1]
+        ) || 0;
+
 
     const segundosDigitados =
-        Number(partes[2]) || 0;
+        Number(
+            partes[2]
+        ) || 0;
 
 
     if (
+
         minutos > 59 ||
+
         segundosDigitados > 59
+
     ) {
 
         return null;
+
     }
 
 
     const total =
+
         horas * 3600 +
+
         minutos * 60 +
+
         segundosDigitados;
 
 
     return total > 0
         ? total
         : null;
+
 }
 
 
@@ -898,14 +1756,18 @@ function converterTempo() {
 botaoIniciar.onclick =
     iniciarPausar;
 
+
 botaoZerar.onclick =
     zerar;
+
 
 botaoSalvar.onclick =
     abrirPopupSessao;
 
+
 botaoEditar.onclick =
     abrirTempoManual;
+
 
 botaoLimpar.onclick =
     limparHistorico;
@@ -916,21 +1778,27 @@ botaoCancelar.onclick =
 
 
 botaoConfirmar.onclick =
+
     () => {
 
         if (acaoConfirmacao) {
+
             acaoConfirmacao();
+
         }
 
         fecharPopup();
+
     };
 
 
 botaoCancelarSessao.onclick =
+
     () => {
 
         popupSessao.style.display =
             "none";
+
     };
 
 
@@ -939,10 +1807,12 @@ botaoSalvarSessao.onclick =
 
 
 botaoCancelarManual.onclick =
+
     () => {
 
         popupManual.style.display =
             "none";
+
     };
 
 
@@ -955,6 +1825,7 @@ botaoSalvarManual.onclick =
 ========================================================= */
 
 popupFundo.onclick =
+
     event => {
 
         if (
@@ -963,11 +1834,14 @@ popupFundo.onclick =
         ) {
 
             fecharPopup();
+
         }
+
     };
 
 
 popupSessao.onclick =
+
     event => {
 
         if (
@@ -977,11 +1851,14 @@ popupSessao.onclick =
 
             popupSessao.style.display =
                 "none";
+
         }
+
     };
 
 
 popupManual.onclick =
+
     event => {
 
         if (
@@ -991,7 +1868,9 @@ popupManual.onclick =
 
             popupManual.style.display =
                 "none";
+
         }
+
     };
 
 
