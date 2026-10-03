@@ -1,602 +1,803 @@
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  }
-
-body {
-font-family: Arial, sans-serif;
-background: #eaf4ff;
-min-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-padding: 30px;
-user-select: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.layout {
-display: flex;
-justify-content: center;
-align-items: flex-start;
-gap: 30px;
-width: 100%;
-max-width: 1000px;
-}
 
 /* =========================================================
-PAINÉIS PRINCIPAIS
+   BODY
+========================================================= */
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eaf4ff;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+
+    user-select: none;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.layout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    gap: 30px;
+
+    width: 100%;
+    max-width: 1000px;
+}
+
+
+/* =========================================================
+   PAINÉIS
 ========================================================= */
 
 .container,
 .resumo {
-background: white;
-border: 2px solid #90caf9;
-border-radius: 20px;
-box-shadow: 0 10px 25px rgba(0, 100, 200, 0.15);
+    background: white;
+
+    border: 2px solid #90caf9;
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 25px rgba(0, 100, 200, 0.15);
 }
 
 .container {
-width: 560px;
-padding: 40px;
-text-align: center;
+    width: 560px;
+    padding: 40px;
+
+    text-align: center;
 }
 
 .resumo {
-width: 320px;
-padding: 25px;
+    width: 320px;
+    padding: 25px;
 }
 
+
 /* =========================================================
-TÍTULOS
+   TÍTULOS
 ========================================================= */
 
 h1,
 .resumo h2,
 .historico h2,
 .popup h2 {
-color: #1976d2;
+    color: #1976d2;
 }
 
 h1 {
-margin-bottom: 25px;
-font-size: 32px;
+    margin-bottom: 25px;
+    font-size: 32px;
 }
 
 .resumo h2,
 .historico h2 {
-font-size: 22px;
-margin-bottom: 15px;
+    font-size: 22px;
+    margin-bottom: 15px;
 }
 
+
 /* =========================================================
-CRONÔMETRO
+   CRONÔMETRO
 ========================================================= */
 
 #cronometro {
-font-size: 55px;
-font-weight: bold;
-color: #1565c0;
-margin-bottom: 30px;
-letter-spacing: 2px;
+    font-size: 55px;
+    font-weight: bold;
+
+    color: #1565c0;
+
+    margin-bottom: 30px;
+
+    letter-spacing: 2px;
 }
 
+
 /* =========================================================
-BOTÕES
+   BOTÕES
 ========================================================= */
 
 .botoes,
 .opcoes-categoria {
-display: flex;
-flex-direction: column;
-gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 button {
-width: 100%;
-padding: 12px;
-border-radius: 10px;
-font-size: 18px;
-font-weight: bold;
-cursor: pointer;
-transition: .2s;
+    width: 100%;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
 }
+
+
+/* BOTÕES PRINCIPAIS */
 
 #botaoIniciar,
 #botaoSalvarSessao,
 #botaoSalvarManual {
-background: #2196f3;
-color: white;
-border: 2px solid #1976d2;
+    background: #2196f3;
+    color: white;
+
+    border: 2px solid #1976d2;
 }
 
 #botaoIniciar:hover,
 #botaoSalvarSessao:hover,
 #botaoSalvarManual:hover {
-background: #1976d2;
-transform: translateY(-2px);
+    background: #1976d2;
+    transform: translateY(-2px);
 }
+
+
+/* BOTÕES SECUNDÁRIOS */
 
 #botaoZerar,
 #botaoSalvar,
 #botaoEditar,
 #botaoCancelarSessao,
 #botaoCancelarManual {
-background: white;
-color: #1976d2;
-border: 2px solid #2196f3;
+    background: white;
+    color: #1976d2;
+
+    border: 2px solid #2196f3;
 }
 
 #botaoZerar:hover,
 #botaoSalvar:hover,
-#botaoEditar:hover {
-background: #e3f2fd;
+#botaoEditar:hover,
+#botaoCancelarSessao:hover,
+#botaoCancelarManual:hover {
+    background: #e3f2fd;
 }
 
+
 /* =========================================================
-HISTÓRICO
+   HISTÓRICO
 ========================================================= */
 
 .historico {
-margin-top: 30px;
-padding-top: 20px;
-text-align: left;
-border-top: 1px solid #bbdefb;
+    margin-top: 30px;
+    padding-top: 20px;
+
+    text-align: left;
+
+    border-top: 1px solid #bbdefb;
 }
 
 #listaHistorico {
-list-style: none;
-max-height: 300px;
-overflow-y: auto;
-padding-right: 5px;
+    list-style: none;
+
+    max-height: 300px;
+
+    overflow-y: auto;
+
+    padding-right: 5px;
 }
 
 #listaHistorico li {
-display: flex;
-justify-content: space-between;
-align-items: center;
-gap: 15px;
-background: #f5faff;
-border: 1px solid #bbdefb;
-border-radius: 8px;
-padding: 10px;
-margin-bottom: 8px;
-color: #1565c0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    background: #f5faff;
+
+    border: 1px solid #bbdefb;
+    border-radius: 8px;
+
+    padding: 10px;
+    margin-bottom: 8px;
+
+    color: #1565c0;
 }
 
 .informacao-sessao {
-display: flex;
-flex-direction: column;
-gap: 3px;
-min-width: 0;
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    min-width: 0;
 }
 
 .categoria,
 .tempo-sessao {
-font-weight: bold;
+    font-weight: bold;
 }
 
 .tempo-sessao {
-font-size: 15px;
+    font-size: 15px;
 }
 
 .data,
 #semHistorico {
-color: #777;
-font-size: 12px;
+    color: #777;
+    font-size: 12px;
 }
 
+
+/* =========================================================
+   BOTÃO EXCLUIR
+========================================================= */
+
 .botaoExcluir {
-width: auto;
-min-width: 75px;
-padding: 5px 10px;
-font-size: 14px;
-background: white;
-color: #d32f2f;
-border: 1px solid #ef9a9a;
-flex-shrink: 0;
+    width: auto;
+    min-width: 75px;
+
+    padding: 5px 10px;
+
+    font-size: 14px;
+
+    background: white;
+
+    color: #d32f2f;
+
+    border: 1px solid #ef9a9a;
+
+    flex-shrink: 0;
 }
 
 .botaoExcluir:hover,
 #botaoLimpar:hover {
-background: #ffebee;
+    background: #ffebee;
 }
 
-#botaoLimpar {
-margin-top: 12px;
-padding: 8px;
-background: white;
-color: #d32f2f;
-border: 1px solid #ef9a9a;
-font-size: 14px;
-}
 
 /* =========================================================
-RESUMO DAS CATEGORIAS
+   LIMPAR HISTÓRICO
+========================================================= */
+
+#botaoLimpar {
+    margin-top: 12px;
+
+    padding: 8px;
+
+    background: white;
+
+    color: #d32f2f;
+
+    border: 1px solid #ef9a9a;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   RESUMO DAS CATEGORIAS
 ========================================================= */
 
 .categoria-resumo {
-background: #f5faff;
-border: 1px solid #bbdefb;
-border-radius: 10px;
-padding: 13px;
-margin-bottom: 10px;
+    background: #f5faff;
+
+    border: 1px solid #bbdefb;
+    border-radius: 10px;
+
+    padding: 13px;
+
+    margin-bottom: 10px;
 }
 
 .categoria-resumo span {
-display: block;
+    display: block;
 }
 
 .nome-categoria {
-color: #555;
-font-size: 14px;
-margin-bottom: 5px;
+    color: #555;
+
+    font-size: 14px;
+
+    margin-bottom: 5px;
 }
 
 .tempo-categoria {
-color: #1565c0;
-font-size: 24px;
-font-weight: bold;
+    color: #1565c0;
+
+    font-size: 24px;
+    font-weight: bold;
 }
+
 
 /* =========================================================
-TOTAL DA SEMANA
-========================================================= */
-
-.total-geral {
-margin-top: 20px;
-padding-top: 20px;
-border-top: 2px solid #bbdefb;
-}
-
-.total-geral span,
-.total-hoje span {
-display: block;
-}
-
-.total-geral .nome-categoria {
-font-weight: bold;
-color: #1976d2;
-}
-
-.total-geral .tempo-categoria {
-font-size: 28px;
-}
-
-/* =========================================================
-TOTAL DE HOJE
+   TOTAL DE HOJE
 ========================================================= */
 
 .total-hoje {
-margin-top: 15px;
-padding-top: 15px;
-border-top: 1px solid #bbdefb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 20px;
+    padding-top: 20px;
+
+    border-top: 2px solid #bbdefb;
 }
 
 .total-hoje .nome-categoria {
-font-weight: bold;
-color: #1976d2;
+    display: block;
+
+    font-weight: bold;
+
+    color: #1976d2;
+
+    margin-bottom: 5px;
 }
 
 .total-hoje .tempo-categoria {
-font-size: 24px;
+    display: block;
+
+    font-size: 26px;
 }
 
+
 /* =========================================================
-HISTÓRICO SEMANAL
+   TOTAL DA SEMANA
+========================================================= */
+
+.total-semana {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 15px;
+    padding-top: 15px;
+
+    border-top: 1px solid #bbdefb;
+}
+
+.total-semana .nome-categoria {
+    display: block;
+
+    font-weight: bold;
+
+    color: #1976d2;
+
+    margin-bottom: 5px;
+}
+
+.total-semana .tempo-categoria {
+    display: block;
+
+    font-size: 24px;
+}
+
+
+/* =========================================================
+   HISTÓRICO SEMANAL
 ========================================================= */
 
 .historico-semanal {
-margin-top: 20px;
-padding-top: 18px;
-border-top: 2px solid #bbdefb;
+    margin-top: 20px;
+    padding-top: 18px;
+
+    border-top: 2px solid #bbdefb;
 }
 
-.historico-semanal h3 {
-color: #1976d2;
-font-size: 18px;
-margin-bottom: 12px;
+.historico-semanal h2 {
+    color: #1976d2;
+
+    font-size: 18px;
+
+    margin-bottom: 12px;
 }
 
 #historicoSemanal {
-display: flex;
-flex-direction: column;
-gap: 8px;
-max-height: 250px;
-overflow-y: auto;
-padding-right: 4px;
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    max-height: 250px;
+
+    overflow-y: auto;
+
+    padding-right: 4px;
 }
 
 .semana-resumo {
-display: flex;
-justify-content: space-between;
-align-items: center;
-gap: 10px;
-padding: 10px;
-background: #f5faff;
-border: 1px solid #bbdefb;
-border-radius: 8px;
-color: #555;
-font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px;
+
+    background: #f5faff;
+
+    border: 1px solid #bbdefb;
+    border-radius: 8px;
+
+    color: #555;
+
+    font-size: 12px;
 }
 
 .semana-resumo strong {
-color: #1565c0;
-font-size: 14px;
-white-space: nowrap;
+    color: #1565c0;
+
+    font-size: 14px;
+
+    white-space: nowrap;
 }
 
 #historicoSemanal p {
-color: #777;
-font-size: 13px;
+    color: #777;
+
+    font-size: 13px;
 }
 
+
 /* =========================================================
-BARRAS DE ROLAGEM
+   BARRAS DE ROLAGEM
 ========================================================= */
 
 #listaHistorico::-webkit-scrollbar,
 #historicoSemanal::-webkit-scrollbar {
-width: 6px;
+    width: 6px;
 }
 
 #listaHistorico::-webkit-scrollbar-track,
 #historicoSemanal::-webkit-scrollbar-track {
-background: #f0f7ff;
-border-radius: 10px;
+    background: #f0f7ff;
+
+    border-radius: 10px;
 }
 
 #listaHistorico::-webkit-scrollbar-thumb,
 #historicoSemanal::-webkit-scrollbar-thumb {
-background: #90caf9;
-border-radius: 10px;
+    background: #90caf9;
+
+    border-radius: 10px;
 }
 
+
 /* =========================================================
-POPUPS
+   POPUPS
 ========================================================= */
 
 .popup-fundo {
-position: fixed;
-inset: 0;
-background: rgba(0, 0, 0, .55);
-display: none;
-justify-content: center;
-align-items: center;
-z-index: 1000;
-padding: 20px;
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+
+    padding: 20px;
 }
 
 .popup {
-background: white;
-width: 380px;
-max-width: 100%;
-padding: 30px;
-border-radius: 15px;
-text-align: center;
-box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
-animation: aparecer .2s ease;
+    background: white;
+
+    width: 380px;
+    max-width: 100%;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3);
+
+    animation: aparecer 0.2s ease;
 }
 
 .popup h2 {
-margin-bottom: 12px;
+    margin-bottom: 12px;
 }
 
 .popup p {
-color: #555;
-margin-bottom: 25px;
-line-height: 1.5;
+    color: #555;
+
+    margin-bottom: 25px;
+
+    line-height: 1.5;
 }
+
+
+/* =========================================================
+   BOTÕES DOS POPUPS
+========================================================= */
 
 .botoes-popup,
 .botoes-formulario {
-display: flex;
-gap: 10px;
+    display: flex;
+
+    gap: 10px;
 }
 
 .botoes-popup button,
 .botoes-formulario button {
-width: 50%;
+    width: 50%;
 }
+
+
+/* CANCELAR */
 
 #botaoCancelar {
-background: white;
-color: #555;
-border: 2px solid #ccc;
+    background: white;
+
+    color: #555;
+
+    border: 2px solid #ccc;
 }
 
-#botaoCancelar:hover,
-#botaoCancelarSessao:hover,
-#botaoCancelarManual:hover {
-background: #f5f5f5;
+#botaoCancelar:hover {
+    background: #f5f5f5;
 }
+
+
+/* CONFIRMAR */
 
 #botaoConfirmar {
-background: #d32f2f;
-color: white;
-border: 2px solid #b71c1c;
+    background: #d32f2f;
+
+    color: white;
+
+    border: 2px solid #b71c1c;
 }
 
 #botaoConfirmar:hover {
-background: #b71c1c;
+    background: #b71c1c;
 }
 
+
 /* =========================================================
-CAMPOS DOS POPUPS
+   CAMPOS DOS POPUPS
 ========================================================= */
 
 .campo-popup {
-text-align: left;
-margin-bottom: 18px;
+    text-align: left;
+
+    margin-bottom: 18px;
 }
 
 .campo-popup > label {
-display: block;
-color: #555;
-font-weight: bold;
-margin-bottom: 8px;
+    display: block;
+
+    color: #555;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
 }
 
+
+/* =========================================================
+   TEMPO MANUAL
+========================================================= */
+
 #tempoManual {
-width: 100%;
-padding: 12px;
-border: 2px solid #bbdefb;
-border-radius: 8px;
-font-size: 30px;
-font-weight: bold;
-text-align: center;
-color: #1565c0;
-outline: none;
-letter-spacing: 2px;
+    width: 100%;
+
+    padding: 12px;
+
+    border: 2px solid #bbdefb;
+    border-radius: 8px;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: center;
+
+    color: #1565c0;
+
+    outline: none;
+
+    letter-spacing: 2px;
 }
 
 #tempoManual:focus {
-border-color: #2196f3;
-box-shadow: 0 0 0 3px rgba(33, 150, 243, .1);
+    border-color: #2196f3;
+
+    box-shadow:
+        0 0 0 3px rgba(33, 150, 243, 0.1);
 }
 
+
 /* =========================================================
-CATEGORIAS
+   CATEGORIAS
 ========================================================= */
 
 .opcoes-categoria {
-gap: 8px;
+    gap: 8px;
 }
 
 .opcao-categoria {
-display: flex;
-align-items: center;
-gap: 10px;
-background: #f5faff;
-border: 1px solid #bbdefb;
-border-radius: 8px;
-padding: 10px;
-cursor: pointer;
-transition: .2s;
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    background: #f5faff;
+
+    border: 1px solid #bbdefb;
+    border-radius: 8px;
+
+    padding: 10px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
 }
 
 .opcao-categoria:hover {
-background: #e3f2fd;
-border-color: #90caf9;
+    background: #e3f2fd;
+
+    border-color: #90caf9;
 }
 
 .opcao-categoria input {
-width: auto;
+    width: auto;
 }
 
 .botoes-formulario {
-margin-top: 20px;
+    margin-top: 20px;
 }
 
+
 /* =========================================================
-ANIMAÇÃO
+   ANIMAÇÃO
 ========================================================= */
 
 @keyframes aparecer {
-from {
-opacity: 0;
-transform: scale(.9);
+
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
 }
 
-to {
-    opacity: 1;
-    transform: scale(1);
-}
-
-}
 
 /* =========================================================
-RESPONSIVIDADE
+   RESPONSIVIDADE
 ========================================================= */
 
 @media (max-width: 950px) {
 
-body {
-    align-items: flex-start;
-    padding-top: 30px;
+    body {
+        align-items: flex-start;
+
+        padding-top: 30px;
+    }
+
+    .layout {
+        flex-direction: column;
+
+        align-items: center;
+
+        max-width: 600px;
+    }
+
+    .container,
+    .resumo {
+        width: 100%;
+
+        max-width: 560px;
+    }
+
+    .resumo {
+        margin-top: 0;
+    }
+
 }
 
-.layout {
-    flex-direction: column;
-    align-items: center;
-    max-width: 600px;
-}
-
-.container,
-.resumo {
-    width: 100%;
-    max-width: 560px;
-}
-
-.resumo {
-    margin-top: 0;
-}
-
-}
 
 @media (max-width: 600px) {
 
-body {
-    padding: 15px;
+    body {
+        padding: 15px;
+    }
+
+    .container,
+    .resumo {
+        padding: 25px 20px;
+
+        border-radius: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    #cronometro {
+        font-size: 42px;
+
+        letter-spacing: 1px;
+    }
+
+    #listaHistorico li {
+        padding: 8px;
+    }
+
+    .botaoExcluir {
+        min-width: 65px;
+
+        font-size: 13px;
+    }
+
+    .tempo-categoria {
+        font-size: 22px;
+    }
+
+    .total-hoje .tempo-categoria {
+        font-size: 24px;
+    }
+
+    .total-semana .tempo-categoria {
+        font-size: 22px;
+    }
+
+    .popup {
+        padding: 25px 20px;
+    }
+
 }
 
-.container,
-.resumo {
-    padding: 25px 20px;
-    border-radius: 15px;
-}
-
-h1 {
-    font-size: 28px;
-}
-
-#cronometro {
-    font-size: 42px;
-    letter-spacing: 1px;
-}
-
-#listaHistorico li {
-    padding: 8px;
-}
-
-.botaoExcluir {
-    min-width: 65px;
-    font-size: 13px;
-}
-
-.tempo-categoria {
-    font-size: 22px;
-}
-
-.total-geral .tempo-categoria {
-    font-size: 26px;
-}
-
-.popup {
-    padding: 25px 20px;
-}
-
-}
 
 @media (max-width: 400px) {
 
-#cronometro {
-    font-size: 34px;
-}
+    #cronometro {
+        font-size: 34px;
+    }
 
-.botoes-popup,
-.botoes-formulario {
-    flex-direction: column;
-}
+    .botoes-popup,
+    .botoes-formulario {
+        flex-direction: column;
+    }
 
-.botoes-popup button,
-.botoes-formulario button {
-    width: 100%;
-}
+    .botoes-popup button,
+    .botoes-formulario button {
+        width: 100%;
+    }
 
-.semana-resumo {
-    flex-direction: column;
-    align-items: flex-start;
-}
+    .semana-resumo {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
 
 }

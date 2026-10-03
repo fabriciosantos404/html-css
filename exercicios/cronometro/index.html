@@ -3,30 +3,47 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>00:00:00 | Cronômetro</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
     <link
         rel="icon"
-        href="https://em-content.zobj.net/source/microsoft-teams/363/skull_1f480.png">
+        href="https://em-content.zobj.net/source/microsoft-teams/363/skull_1f480.png"
+    >
 
 </head>
+
 
 <body>
 
 <div class="layout">
 
+
+    <!-- =====================================================
+         CRONÔMETRO E HISTÓRICO
+    ====================================================== -->
+
     <div class="container">
 
         <h1>Cronômetro</h1>
 
+
         <div id="cronometro">
             00:00:00
         </div>
+
 
         <div class="botoes">
 
@@ -49,6 +66,8 @@
         </div>
 
 
+        <!-- HISTÓRICO -->
+
         <div class="historico">
 
             <h2>Histórico</h2>
@@ -68,30 +87,19 @@
     </div>
 
 
+
+    <!-- =====================================================
+         RESUMO
+    ====================================================== -->
+
     <div class="resumo">
 
         <h2>Resumo dos estudos</h2>
 
+
+        <!-- TEMPO POR CATEGORIA -->
+
         <div id="resumoCategorias"></div>
-
-
-        <!-- TOTAL DA SEMANA -->
-
-        <div class="total-geral">
-
-            <span class="nome-categoria">
-                Total da Semana
-            </span>
-
-            <span
-                class="tempo-categoria"
-                id="totalSemana">
-
-                00:00:00
-
-            </span>
-
-        </div>
 
 
         <!-- TOTAL DE HOJE -->
@@ -104,22 +112,37 @@
 
             <span
                 class="tempo-categoria"
-                id="totalHoje">
-
+                id="totalHoje"
+            >
                 00:00:00
-
             </span>
 
         </div>
 
 
-        <!-- HISTÓRICO SEMANAL -->
+        <!-- TOTAL DA SEMANA -->
+
+        <div class="total-semana">
+
+            <span class="nome-categoria">
+                Esta semana
+            </span>
+
+            <span
+                class="tempo-categoria"
+                id="totalSemana"
+            >
+                00:00:00
+            </span>
+
+        </div>
+
+
+        <!-- HISTÓRICO DAS SEMANAS -->
 
         <div class="historico-semanal">
 
-            <h3>
-                Histórico semanal
-            </h3>
+            <h2>Histórico semanal</h2>
 
             <div id="historicoSemanal"></div>
 
@@ -127,7 +150,10 @@
 
     </div>
 
+
+
 </div>
+
 
 
 <!-- =========================================================
@@ -136,7 +162,8 @@
 
 <div
     class="popup-fundo"
-    id="popupFundo">
+    id="popupFundo"
+>
 
     <div class="popup">
 
@@ -165,13 +192,15 @@
 </div>
 
 
+
 <!-- =========================================================
      POPUP SALVAR SESSÃO
 ========================================================= -->
 
 <div
     class="popup-fundo"
-    id="popupSessao">
+    id="popupSessao"
+>
 
     <div class="popup">
 
@@ -183,6 +212,7 @@
             Escolha o tipo de estudo desta sessão.
         </p>
 
+
         <div class="campo-popup">
 
             <label>
@@ -191,10 +221,11 @@
 
             <div
                 class="opcoes-categoria"
-                id="categoriasSessao">
-            </div>
+                id="categoriasSessao"
+            ></div>
 
         </div>
+
 
         <div class="botoes-formulario">
 
@@ -213,13 +244,15 @@
 </div>
 
 
+
 <!-- =========================================================
      POPUP TEMPO MANUAL
 ========================================================= -->
 
 <div
     class="popup-fundo"
-    id="popupManual">
+    id="popupManual"
+>
 
     <div class="popup">
 
@@ -230,6 +263,7 @@
         <p>
             Digite o tempo usando apenas números.
         </p>
+
 
         <div class="campo-popup">
 
@@ -242,9 +276,11 @@
                 id="tempoManual"
                 value="00:00:00"
                 inputmode="numeric"
-                autocomplete="off">
+                autocomplete="off"
+            >
 
         </div>
+
 
         <div class="campo-popup">
 
@@ -254,10 +290,11 @@
 
             <div
                 class="opcoes-categoria"
-                id="categoriasManual">
-            </div>
+                id="categoriasManual"
+            ></div>
 
         </div>
+
 
         <div class="botoes-formulario">
 
@@ -274,6 +311,7 @@
     </div>
 
 </div>
+
 
 
 <script src="script.js"></script>
