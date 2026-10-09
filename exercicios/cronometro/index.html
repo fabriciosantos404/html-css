@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-<html lang="pt-BR">
+<html lang="pt-BR" data-tema="claro">
 
 <head>
 
@@ -11,55 +10,168 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>00:00:00 | Cronômetro</title>
+    <title>Cronômetro de Estudos</title>
+
+    <meta
+        name="description"
+        content="Cronômetro de estudos com histórico de sessões, resumo por categoria e totais diário e semanal."
+    >
+
+    <meta
+        name="theme-color"
+        content="#eaf4ff"
+        media="(prefers-color-scheme: light)"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0a0f1a"
+        media="(prefers-color-scheme: dark)"
+    >
+
+    <link
+        rel="icon"
+        href="favicon.svg"
+        type="image/svg+xml"
+    >
 
     <link
         rel="stylesheet"
         href="style.css"
     >
 
-    <link
-        rel="icon"
-        href="https://em-content.zobj.net/source/microsoft-teams/363/skull_1f480.png"
-    >
+    <!-- Define o tema antes da primeira pintura para evitar "flash" -->
+    <script>
+        (function () {
+            try {
+                var tema = localStorage.getItem("tema");
+
+                if (tema !== "claro" && tema !== "escuro") {
+                    tema = window.matchMedia("(prefers-color-scheme: dark)").matches
+                        ? "escuro"
+                        : "claro";
+                }
+
+                document.documentElement.dataset.tema = tema;
+            } catch (erro) {
+                document.documentElement.dataset.tema = "claro";
+            }
+        })();
+    </script>
+
+    <script
+        src="script.js"
+        defer
+    ></script>
 
 </head>
 
 
 <body>
 
-<div class="layout">
+<noscript>
+    <p class="aviso-js">
+        Este aplicativo precisa de JavaScript para funcionar.
+    </p>
+</noscript>
+
+
+<main class="layout">
 
 
     <!-- =====================================================
          CRONÔMETRO E HISTÓRICO
     ====================================================== -->
 
-    <div class="container">
+    <section
+        class="painel painel--principal"
+        aria-labelledby="tituloPrincipal"
+    >
 
-        <h1>Cronômetro</h1>
+        <div class="cabecalho-painel">
+
+            <h1 id="tituloPrincipal">
+                Cronômetro
+            </h1>
+
+            <button
+                type="button"
+                id="botaoTema"
+                class="botao-tema"
+                aria-label="Alternar para tema escuro"
+                aria-pressed="false"
+            >
+                <svg
+                    class="icone icone--sol"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    aria-hidden="true"
+                    focusable="false"
+                >
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                </svg>
+
+                <svg
+                    class="icone icone--lua"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="none"
+                    aria-hidden="true"
+                    focusable="false"
+                >
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+
+        </div>
 
 
-        <div id="cronometro">
+        <div
+            id="cronometro"
+            class="cronometro"
+            role="timer"
+            aria-live="off"
+            aria-label="Tempo decorrido"
+        >
             00:00:00
         </div>
 
 
         <div class="botoes">
 
-            <button id="botaoIniciar">
+            <button
+                type="button"
+                id="botaoIniciar"
+                class="botao botao--primario"
+            >
                 Iniciar
             </button>
 
-            <button id="botaoSalvar">
+            <button
+                type="button"
+                id="botaoSalvar"
+                class="botao botao--secundario"
+            >
                 Salvar sessão
             </button>
 
-            <button id="botaoEditar">
+            <button
+                type="button"
+                id="botaoEditar"
+                class="botao botao--secundario"
+            >
                 Registrar tempo manual
             </button>
 
-            <button id="botaoZerar">
+            <button
+                type="button"
+                id="botaoZerar"
+                class="botao botao--secundario"
+            >
                 Zerar
             </button>
 
@@ -68,23 +180,39 @@
 
         <!-- HISTÓRICO -->
 
-        <div class="historico">
+        <section
+            class="historico"
+            aria-labelledby="tituloHistorico"
+        >
 
-            <h2>Histórico</h2>
+            <h2 id="tituloHistorico">
+                Histórico
+            </h2>
 
-            <p id="semHistorico">
+            <p
+                id="semHistorico"
+                class="estado-vazio"
+            >
                 Nenhuma sessão salva.
             </p>
 
-            <ul id="listaHistorico"></ul>
+            <ul
+                id="listaHistorico"
+                class="rolavel"
+                aria-label="Sessões de estudo salvas"
+            ></ul>
 
-            <button id="botaoLimpar">
+            <button
+                type="button"
+                id="botaoLimpar"
+                class="botao botao--perigo-claro botao--pequeno"
+            >
                 Limpar histórico
             </button>
 
-        </div>
+        </section>
 
-    </div>
+    </section>
 
 
 
@@ -92,19 +220,24 @@
          RESUMO
     ====================================================== -->
 
-    <div class="resumo">
+    <section
+        class="painel painel--resumo"
+        aria-labelledby="tituloResumo"
+    >
 
-        <h2>Resumo dos estudos</h2>
+        <h2 id="tituloResumo">
+            Resumo dos estudos
+        </h2>
 
 
         <!-- TEMPO POR CATEGORIA -->
 
-        <div id="resumoCategorias"></div>
+        <dl id="resumoCategorias"></dl>
 
 
         <!-- TOTAL DE HOJE -->
 
-        <div class="total-hoje">
+        <div class="total total--hoje">
 
             <span class="nome-categoria">
                 Hoje
@@ -122,7 +255,7 @@
 
         <!-- TOTAL DA SEMANA -->
 
-        <div class="total-semana">
+        <div class="total total--semana">
 
             <span class="nome-categoria">
                 Esta semana
@@ -140,19 +273,26 @@
 
         <!-- HISTÓRICO DAS SEMANAS -->
 
-        <div class="historico-semanal">
+        <section
+            class="historico-semanal"
+            aria-labelledby="tituloSemanal"
+        >
 
-            <h2>Histórico semanal</h2>
+            <h3 id="tituloSemanal">
+                Histórico semanal
+            </h3>
 
-            <div id="historicoSemanal"></div>
+            <div
+                id="historicoSemanal"
+                class="rolavel"
+            ></div>
 
-        </div>
+        </section>
 
-    </div>
+    </section>
 
 
-
-</div>
+</main>
 
 
 
@@ -160,28 +300,38 @@
      POPUP DE CONFIRMAÇÃO
 ========================================================= -->
 
-<div
-    class="popup-fundo"
-    id="popupFundo"
+<dialog
+    class="modal"
+    id="popupConfirmacao"
+    aria-labelledby="popupConfirmacaoTitulo"
+    aria-describedby="popupConfirmacaoMensagem"
 >
 
     <div class="popup">
 
-        <h2 id="popupTitulo">
+        <h2 id="popupConfirmacaoTitulo">
             Confirmar
         </h2>
 
-        <p id="popupMensagem">
+        <p id="popupConfirmacaoMensagem">
             Deseja realmente continuar?
         </p>
 
         <div class="botoes-popup">
 
-            <button id="botaoCancelar">
+            <button
+                type="button"
+                id="botaoCancelar"
+                class="botao botao--neutro"
+            >
                 Cancelar
             </button>
 
-            <button id="botaoConfirmar">
+            <button
+                type="button"
+                id="botaoConfirmar"
+                class="botao botao--perigo"
+            >
                 Confirmar
             </button>
 
@@ -189,7 +339,7 @@
 
     </div>
 
-</div>
+</dialog>
 
 
 
@@ -197,51 +347,64 @@
      POPUP SALVAR SESSÃO
 ========================================================= -->
 
-<div
-    class="popup-fundo"
+<dialog
+    class="modal"
     id="popupSessao"
+    aria-labelledby="tituloSessao"
+    aria-describedby="descricaoSessao"
 >
 
-    <div class="popup">
+    <form
+        class="popup"
+        id="formSessao"
+    >
 
-        <h2>
+        <h2 id="tituloSessao">
             Salvar sessão
         </h2>
 
-        <p>
+        <p id="descricaoSessao">
             Escolha o tipo de estudo desta sessão.
         </p>
 
 
-        <div class="campo-popup">
+        <fieldset class="campo-popup">
 
-            <label>
+            <legend>
                 Tipo de estudo
-            </label>
+            </legend>
 
             <div
                 class="opcoes-categoria"
                 id="categoriasSessao"
             ></div>
 
-        </div>
+        </fieldset>
 
 
         <div class="botoes-formulario">
 
-            <button id="botaoCancelarSessao">
+            <button
+                type="button"
+                id="botaoCancelarSessao"
+                class="botao botao--neutro"
+            >
                 Cancelar
             </button>
 
-            <button id="botaoSalvarSessao">
+            <button
+                type="submit"
+                id="botaoSalvarSessao"
+                class="botao botao--primario"
+            >
                 Salvar
             </button>
 
         </div>
 
-    </div>
+    </form>
 
-</div>
+</dialog>
 
 
 
@@ -249,72 +412,145 @@
      POPUP TEMPO MANUAL
 ========================================================= -->
 
-<div
-    class="popup-fundo"
+<dialog
+    class="modal"
     id="popupManual"
+    aria-labelledby="tituloManual"
+    aria-describedby="descricaoManual"
 >
 
-    <div class="popup">
+    <form
+        class="popup"
+        id="formManual"
+        novalidate
+    >
 
-        <h2>
+        <h2 id="tituloManual">
             Registrar tempo
         </h2>
 
-        <p>
-            Digite o tempo usando apenas números.
+        <p id="descricaoManual">
+            Preencha horas, minutos e segundos.
         </p>
 
 
-        <div class="campo-popup">
+        <fieldset class="campo-popup">
 
-            <label for="tempoManual">
+            <legend>
                 Tempo de estudo
-            </label>
+            </legend>
 
-            <input
-                type="text"
-                id="tempoManual"
-                value="00:00:00"
-                inputmode="numeric"
-                autocomplete="off"
+            <div
+                class="entrada-tempo"
+                id="entradaTempo"
             >
 
-        </div>
+                <label class="segmento-tempo">
+                    <input
+                        type="text"
+                        id="horasManual"
+                        value=""
+                        placeholder="00"
+                        inputmode="numeric"
+                        autocomplete="off"
+                        spellcheck="false"
+                        maxlength="2"
+                    >
+                    <span class="rotulo-segmento">horas</span>
+                </label>
+
+                <span
+                    class="separador-tempo"
+                    aria-hidden="true"
+                >
+                    :
+                </span>
+
+                <label class="segmento-tempo">
+                    <input
+                        type="text"
+                        id="minutosManual"
+                        value=""
+                        placeholder="00"
+                        inputmode="numeric"
+                        autocomplete="off"
+                        spellcheck="false"
+                        maxlength="2"
+                    >
+                    <span class="rotulo-segmento">min</span>
+                </label>
+
+                <span
+                    class="separador-tempo"
+                    aria-hidden="true"
+                >
+                    :
+                </span>
+
+                <label class="segmento-tempo">
+                    <input
+                        type="text"
+                        id="segundosManual"
+                        value=""
+                        placeholder="00"
+                        inputmode="numeric"
+                        autocomplete="off"
+                        spellcheck="false"
+                        maxlength="2"
+                    >
+                    <span class="rotulo-segmento">seg</span>
+                </label>
+
+            </div>
+
+            <p
+                class="erro"
+                id="erroTempo"
+                role="alert"
+                hidden
+            ></p>
+
+        </fieldset>
 
 
-        <div class="campo-popup">
+        <fieldset class="campo-popup">
 
-            <label>
+            <legend>
                 Tipo de estudo
-            </label>
+            </legend>
 
             <div
                 class="opcoes-categoria"
                 id="categoriasManual"
             ></div>
 
-        </div>
+        </fieldset>
 
 
         <div class="botoes-formulario">
 
-            <button id="botaoCancelarManual">
+            <button
+                type="button"
+                id="botaoCancelarManual"
+                class="botao botao--neutro"
+            >
                 Cancelar
             </button>
 
-            <button id="botaoSalvarManual">
+            <button
+                type="submit"
+                id="botaoSalvarManual"
+                class="botao botao--primario"
+            >
                 Registrar
             </button>
 
         </div>
 
-    </div>
+    </form>
 
-</div>
+</dialog>
 
-
-
-<script src="script.js"></script>
 
 </body>
 

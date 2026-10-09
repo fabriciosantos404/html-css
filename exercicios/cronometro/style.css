@@ -1,4 +1,89 @@
 /* =========================================================
+   TOKENS DE DESIGN (tema claro)
+========================================================= */
+
+:root {
+    color-scheme: light;
+
+    --cor-fundo: #eaf4ff;
+    --cor-painel: #ffffff;
+    --cor-superficie: #f5faff;
+
+    --cor-texto: #243044;
+    --cor-texto-claro: #555555;
+    --cor-texto-suave: #777777;
+
+    --cor-titulo: #1976d2;
+    --cor-destaque: #1565c0;
+
+    --cor-primaria: #2196f3;
+    --cor-primaria-escura: #1976d2;
+    --cor-primaria-suave: #e3f2fd;
+
+    --cor-borda: #90caf9;
+    --cor-borda-suave: #bbdefb;
+    --cor-neutro-borda: #cccccc;
+
+    --cor-perigo: #d32f2f;
+    --cor-perigo-escura: #b71c1c;
+    --cor-perigo-suave: #ffebee;
+    --cor-borda-perigo: #ef9a9a;
+
+    --cor-veu: rgba(0, 0, 0, 0.55);
+
+    --sombra-painel: 0 10px 25px rgba(0, 100, 200, 0.15);
+    --sombra-popup: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --sombra-botao: 0 6px 14px rgba(25, 118, 210, 0.35);
+
+    --raio-painel: 20px;
+    --raio-popup: 15px;
+    --raio: 10px;
+    --raio-peq: 8px;
+
+    --transicao: 0.2s ease;
+}
+
+
+/* =========================================================
+   TOKENS DE DESIGN (tema escuro)
+========================================================= */
+
+:root[data-tema="escuro"] {
+    color-scheme: dark;
+
+    --cor-fundo: #0a0f1a;
+    --cor-painel: #131c2e;
+    --cor-superficie: #1a2740;
+
+    --cor-texto: #e5eaf3;
+    --cor-texto-claro: #b6c2d6;
+    --cor-texto-suave: #8b98ad;
+
+    --cor-titulo: #64b5f6;
+    --cor-destaque: #90caf9;
+
+    --cor-primaria: #2196f3;
+    --cor-primaria-escura: #1e88e5;
+    --cor-primaria-suave: #16324f;
+
+    --cor-borda: #24406b;
+    --cor-borda-suave: #243b5e;
+    --cor-neutro-borda: #3b4a63;
+
+    --cor-perigo: #ef5350;
+    --cor-perigo-escura: #e53935;
+    --cor-perigo-suave: #3a1a1f;
+    --cor-borda-perigo: #7f3b42;
+
+    --cor-veu: rgba(0, 0, 0, 0.7);
+
+    --sombra-painel: 0 10px 25px rgba(0, 0, 0, 0.5);
+    --sombra-popup: 0 10px 30px rgba(0, 0, 0, 0.6);
+    --sombra-botao: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================================================
    RESET
 ========================================================= */
 
@@ -8,23 +93,82 @@
     box-sizing: border-box;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 
 /* =========================================================
-   BODY
+   BASE
 ========================================================= */
 
 body {
-    font-family: Arial, sans-serif;
-    background: #eaf4ff;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+
     min-height: 100vh;
+    min-height: 100dvh;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     padding: 30px;
+}
 
-    user-select: none;
+::selection {
+    background: rgba(33, 150, 243, 0.3);
+}
+
+:focus-visible {
+    outline: 3px solid var(--cor-primaria);
+    outline-offset: 2px;
+}
+
+h1 {
+    font-size: 32px;
+    color: var(--cor-titulo);
+}
+
+h2,
+h3 {
+    color: var(--cor-titulo);
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.aviso-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 2000;
+
+    padding: 12px;
+
+    text-align: center;
+    font-weight: bold;
+
+    background: var(--cor-perigo);
+    color: #ffffff;
+}
+
+.estado-vazio {
+    color: var(--cor-texto-suave);
+    font-size: 13px;
 }
 
 
@@ -48,50 +192,79 @@ body {
    PAINÉIS
 ========================================================= */
 
-.container,
-.resumo {
-    background: white;
+.painel {
+    background: var(--cor-painel);
 
-    border: 2px solid #90caf9;
-    border-radius: 20px;
+    border: 2px solid var(--cor-borda);
+    border-radius: var(--raio-painel);
 
-    box-shadow:
-        0 10px 25px rgba(0, 100, 200, 0.15);
+    box-shadow: var(--sombra-painel);
 }
 
-.container {
-    width: 560px;
+.painel--principal {
+    width: min(560px, 100%);
     padding: 40px;
 
     text-align: center;
 }
 
-.resumo {
-    width: 320px;
+.painel--resumo {
+    width: min(330px, 100%);
     padding: 25px;
 }
 
 
 /* =========================================================
-   TÍTULOS
+   CABEÇALHO E TEMA
 ========================================================= */
 
-h1,
-.resumo h2,
-.historico h2,
-.popup h2 {
-    color: #1976d2;
-}
+.cabecalho-painel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-h1 {
+    gap: 15px;
+
     margin-bottom: 25px;
-    font-size: 32px;
 }
 
-.resumo h2,
-.historico h2 {
-    font-size: 22px;
-    margin-bottom: 15px;
+.botao-tema {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    background: var(--cor-superficie);
+    color: var(--cor-titulo);
+
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    transition:
+        background-color var(--transicao),
+        border-color var(--transicao),
+        transform var(--transicao);
+}
+
+.botao-tema:hover {
+    background: var(--cor-primaria-suave);
+    border-color: var(--cor-borda);
+    transform: translateY(-2px);
+}
+
+.icone {
+    width: 20px;
+    height: 20px;
+}
+
+:root[data-tema="claro"] .icone--lua,
+:root[data-tema="escuro"] .icone--sol {
+    display: none;
 }
 
 
@@ -99,15 +272,23 @@ h1 {
    CRONÔMETRO
 ========================================================= */
 
-#cronometro {
-    font-size: 55px;
+.cronometro {
+    font-size: clamp(1.9rem, 9vw, 3.44rem);
     font-weight: bold;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
 
-    color: #1565c0;
+    letter-spacing: 2px;
+
+    color: var(--cor-destaque);
 
     margin-bottom: 30px;
 
-    letter-spacing: 2px;
+    transition: text-shadow var(--transicao);
+}
+
+.cronometro--rodando {
+    text-shadow: 0 0 18px rgba(33, 150, 243, 0.45);
 }
 
 
@@ -115,67 +296,122 @@ h1 {
    BOTÕES
 ========================================================= */
 
-.botoes,
-.opcoes-categoria {
+.botoes {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-button {
+.botao {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
     width: 100%;
+    padding: 12px 16px;
 
-    padding: 12px;
+    border: 2px solid transparent;
+    border-radius: var(--raio);
 
-    border-radius: 10px;
-
+    font: inherit;
     font-size: 18px;
     font-weight: bold;
+    line-height: 1.2;
+
+    text-align: center;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    transition:
+        background-color var(--transicao),
+        color var(--transicao),
+        border-color var(--transicao),
+        box-shadow var(--transicao),
+        transform var(--transicao);
+}
+
+.botao:active {
+    transform: translateY(0);
+}
+
+.botao--pequeno {
+    padding: 8px 12px;
+    font-size: 14px;
 }
 
 
-/* BOTÕES PRINCIPAIS */
+/* PRIMÁRIO */
 
-#botaoIniciar,
-#botaoSalvarSessao,
-#botaoSalvarManual {
-    background: #2196f3;
-    color: white;
+.botao--primario {
+    background: var(--cor-primaria);
+    color: #ffffff;
 
-    border: 2px solid #1976d2;
+    border-color: var(--cor-primaria-escura);
 }
 
-#botaoIniciar:hover,
-#botaoSalvarSessao:hover,
-#botaoSalvarManual:hover {
-    background: #1976d2;
+.botao--primario:hover {
+    background: var(--cor-primaria-escura);
+
     transform: translateY(-2px);
+    box-shadow: var(--sombra-botao);
 }
 
 
-/* BOTÕES SECUNDÁRIOS */
+/* SECUNDÁRIO */
 
-#botaoZerar,
-#botaoSalvar,
-#botaoEditar,
-#botaoCancelarSessao,
-#botaoCancelarManual {
-    background: white;
-    color: #1976d2;
+.botao--secundario {
+    background: var(--cor-painel);
+    color: var(--cor-titulo);
 
-    border: 2px solid #2196f3;
+    border-color: var(--cor-primaria);
 }
 
-#botaoZerar:hover,
-#botaoSalvar:hover,
-#botaoEditar:hover,
-#botaoCancelarSessao:hover,
-#botaoCancelarManual:hover {
-    background: #e3f2fd;
+.botao--secundario:hover {
+    background: var(--cor-primaria-suave);
+}
+
+
+/* NEUTRO (cancelar) */
+
+.botao--neutro {
+    background: var(--cor-painel);
+    color: var(--cor-texto-claro);
+
+    border-color: var(--cor-neutro-borda);
+}
+
+.botao--neutro:hover {
+    background: var(--cor-superficie);
+}
+
+
+/* PERIGO (sólido) */
+
+.botao--perigo {
+    background: var(--cor-perigo);
+    color: #ffffff;
+
+    border-color: var(--cor-perigo-escura);
+}
+
+.botao--perigo:hover {
+    background: var(--cor-perigo-escura);
+}
+
+
+/* PERIGO (contorno) */
+
+.botao--perigo-claro {
+    background: var(--cor-painel);
+    color: var(--cor-perigo);
+
+    border-width: 1px;
+    border-color: var(--cor-borda-perigo);
+}
+
+.botao--perigo-claro:hover {
+    background: var(--cor-perigo-suave);
 }
 
 
@@ -189,7 +425,11 @@ button {
 
     text-align: left;
 
-    border-top: 1px solid #bbdefb;
+    border-top: 1px solid var(--cor-borda-suave);
+}
+
+.historico > .botao {
+    margin-top: 12px;
 }
 
 #listaHistorico {
@@ -198,8 +438,6 @@ button {
     max-height: 300px;
 
     overflow-y: auto;
-
-    padding-right: 5px;
 }
 
 #listaHistorico li {
@@ -209,15 +447,15 @@ button {
 
     gap: 15px;
 
-    background: #f5faff;
+    background: var(--cor-superficie);
 
-    border: 1px solid #bbdefb;
-    border-radius: 8px;
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: var(--raio-peq);
 
     padding: 10px;
     margin-bottom: 8px;
 
-    color: #1565c0;
+    color: var(--cor-destaque);
 }
 
 .informacao-sessao {
@@ -236,20 +474,15 @@ button {
 
 .tempo-sessao {
     font-size: 15px;
+    font-variant-numeric: tabular-nums;
 }
 
-.data,
-#semHistorico {
-    color: #777;
+.data {
+    color: var(--cor-texto-suave);
     font-size: 12px;
 }
 
-
-/* =========================================================
-   BOTÃO EXCLUIR
-========================================================= */
-
-.botaoExcluir {
+.botao-excluir {
     width: auto;
     min-width: 75px;
 
@@ -257,61 +490,33 @@ button {
 
     font-size: 14px;
 
-    background: white;
-
-    color: #d32f2f;
-
-    border: 1px solid #ef9a9a;
-
     flex-shrink: 0;
 }
 
-.botaoExcluir:hover,
-#botaoLimpar:hover {
-    background: #ffebee;
-}
-
 
 /* =========================================================
-   LIMPAR HISTÓRICO
-========================================================= */
-
-#botaoLimpar {
-    margin-top: 12px;
-
-    padding: 8px;
-
-    background: white;
-
-    color: #d32f2f;
-
-    border: 1px solid #ef9a9a;
-
-    font-size: 14px;
-}
-
-
-/* =========================================================
-   RESUMO DAS CATEGORIAS
+   RESUMO
 ========================================================= */
 
 .categoria-resumo {
-    background: #f5faff;
+    background: var(--cor-superficie);
 
-    border: 1px solid #bbdefb;
-    border-radius: 10px;
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: var(--raio-peq);
 
     padding: 13px;
 
     margin-bottom: 10px;
 }
 
-.categoria-resumo span {
+.categoria-resumo dt,
+.categoria-resumo dd {
     display: block;
+    margin: 0;
 }
 
 .nome-categoria {
-    color: #555;
+    color: var(--cor-texto-claro);
 
     font-size: 14px;
 
@@ -319,50 +524,17 @@ button {
 }
 
 .tempo-categoria {
-    color: #1565c0;
+    color: var(--cor-destaque);
 
     font-size: 24px;
     font-weight: bold;
+    font-variant-numeric: tabular-nums;
 }
 
 
-/* =========================================================
-   TOTAL DE HOJE
-========================================================= */
+/* TOTAIS DE HOJE E DA SEMANA */
 
-.total-hoje {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    margin-top: 20px;
-    padding-top: 20px;
-
-    border-top: 2px solid #bbdefb;
-}
-
-.total-hoje .nome-categoria {
-    display: block;
-
-    font-weight: bold;
-
-    color: #1976d2;
-
-    margin-bottom: 5px;
-}
-
-.total-hoje .tempo-categoria {
-    display: block;
-
-    font-size: 26px;
-}
-
-
-/* =========================================================
-   TOTAL DA SEMANA
-========================================================= */
-
-.total-semana {
+.total {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -370,23 +542,34 @@ button {
     margin-top: 15px;
     padding-top: 15px;
 
-    border-top: 1px solid #bbdefb;
+    border-top: 1px solid var(--cor-borda-suave);
 }
 
-.total-semana .nome-categoria {
+.total--hoje {
+    margin-top: 20px;
+    padding-top: 20px;
+
+    border-top-width: 2px;
+}
+
+.total .nome-categoria {
     display: block;
 
     font-weight: bold;
 
-    color: #1976d2;
+    color: var(--cor-titulo);
 
     margin-bottom: 5px;
 }
 
-.total-semana .tempo-categoria {
+.total .tempo-categoria {
     display: block;
 
     font-size: 24px;
+}
+
+.total--hoje .tempo-categoria {
+    font-size: 26px;
 }
 
 
@@ -398,15 +581,7 @@ button {
     margin-top: 20px;
     padding-top: 18px;
 
-    border-top: 2px solid #bbdefb;
-}
-
-.historico-semanal h2 {
-    color: #1976d2;
-
-    font-size: 18px;
-
-    margin-bottom: 12px;
+    border-top: 2px solid var(--cor-borda-suave);
 }
 
 #historicoSemanal {
@@ -418,8 +593,6 @@ button {
     max-height: 250px;
 
     overflow-y: auto;
-
-    padding-right: 4px;
 }
 
 .semana-resumo {
@@ -431,28 +604,23 @@ button {
 
     padding: 10px;
 
-    background: #f5faff;
+    background: var(--cor-superficie);
 
-    border: 1px solid #bbdefb;
-    border-radius: 8px;
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: var(--raio-peq);
 
-    color: #555;
+    color: var(--cor-texto-claro);
 
     font-size: 12px;
 }
 
 .semana-resumo strong {
-    color: #1565c0;
+    color: var(--cor-destaque);
 
     font-size: 14px;
+    font-variant-numeric: tabular-nums;
 
     white-space: nowrap;
-}
-
-#historicoSemanal p {
-    color: #777;
-
-    font-size: 13px;
 }
 
 
@@ -460,61 +628,85 @@ button {
    BARRAS DE ROLAGEM
 ========================================================= */
 
-#listaHistorico::-webkit-scrollbar,
-#historicoSemanal::-webkit-scrollbar {
+.rolavel {
+    scrollbar-width: thin;
+    scrollbar-color: var(--cor-borda) var(--cor-superficie);
+}
+
+.rolavel::-webkit-scrollbar {
     width: 6px;
 }
 
-#listaHistorico::-webkit-scrollbar-track,
-#historicoSemanal::-webkit-scrollbar-track {
-    background: #f0f7ff;
+.rolavel::-webkit-scrollbar-track {
+    background: var(--cor-superficie);
 
     border-radius: 10px;
 }
 
-#listaHistorico::-webkit-scrollbar-thumb,
-#historicoSemanal::-webkit-scrollbar-thumb {
-    background: #90caf9;
+.rolavel::-webkit-scrollbar-thumb {
+    background: var(--cor-borda);
 
     border-radius: 10px;
 }
 
 
 /* =========================================================
-   POPUPS
+   DIÁLOGOS (POPUPS)
+   O <dialog> cobre a viewport inteira e faz o papel do
+   antigo "fundo"; o cartão branco vive dentro dele.
 ========================================================= */
 
-.popup-fundo {
+.modal {
     position: fixed;
-
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.55);
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
 
+    margin: 0;
+    padding: 24px;
+
+    border: 0;
+
+    background: var(--cor-veu);
+    color: var(--cor-texto);
+
+    overflow-y: auto;
+}
+
+.modal:not([open]) {
     display: none;
+}
 
-    justify-content: center;
-    align-items: center;
+.modal[open] {
+    display: flex;
 
-    z-index: 1000;
+    animation: fundoAparecer 0.2s ease;
+}
 
-    padding: 20px;
+.modal::backdrop {
+    background: transparent;
 }
 
 .popup {
-    background: white;
+    width: min(380px, 100%);
 
-    width: 380px;
-    max-width: 100%;
+    /* margin auto centraliza mesmo quando o cartão é maior
+       que a tela (evita o corte no topo do flexbox). */
+    margin: auto;
 
     padding: 30px;
 
-    border-radius: 15px;
+    background: var(--cor-painel);
+    color: var(--cor-texto);
+
+    border-radius: var(--raio-popup);
 
     text-align: center;
 
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--sombra-popup);
 
     animation: aparecer 0.2s ease;
 }
@@ -524,7 +716,7 @@ button {
 }
 
 .popup p {
-    color: #555;
+    color: var(--cor-texto-claro);
 
     margin-bottom: 25px;
 
@@ -532,9 +724,7 @@ button {
 }
 
 
-/* =========================================================
-   BOTÕES DOS POPUPS
-========================================================= */
+/* BOTÕES DOS DIÁLOGOS */
 
 .botoes-popup,
 .botoes-formulario {
@@ -543,100 +733,149 @@ button {
     gap: 10px;
 }
 
-.botoes-popup button,
-.botoes-formulario button {
+.botoes-formulario {
+    margin-top: 20px;
+}
+
+.botoes-popup .botao,
+.botoes-formulario .botao {
     width: 50%;
 }
 
 
-/* CANCELAR */
-
-#botaoCancelar {
-    background: white;
-
-    color: #555;
-
-    border: 2px solid #ccc;
-}
-
-#botaoCancelar:hover {
-    background: #f5f5f5;
-}
-
-
-/* CONFIRMAR */
-
-#botaoConfirmar {
-    background: #d32f2f;
-
-    color: white;
-
-    border: 2px solid #b71c1c;
-}
-
-#botaoConfirmar:hover {
-    background: #b71c1c;
-}
-
-
-/* =========================================================
-   CAMPOS DOS POPUPS
-========================================================= */
+/* CAMPOS */
 
 .campo-popup {
     text-align: left;
 
     margin-bottom: 18px;
+
+    border: 0;
+    min-width: 0;
 }
 
-.campo-popup > label {
+.campo-popup > legend {
     display: block;
+    width: 100%;
 
-    color: #555;
+    padding: 0;
+
+    color: var(--cor-texto-claro);
 
     font-weight: bold;
+    font-size: 15px;
 
     margin-bottom: 8px;
 }
 
 
-/* =========================================================
-   TEMPO MANUAL
-========================================================= */
+/* ENTRADA DE TEMPO (HH | MM | SS) */
 
-#tempoManual {
-    width: 100%;
+.entrada-tempo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 
-    padding: 12px;
+    gap: 8px;
+}
 
-    border: 2px solid #bbdefb;
-    border-radius: 8px;
+.segmento-tempo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    gap: 5px;
+
+    cursor: text;
+}
+
+.segmento-tempo input {
+    width: 62px;
+    height: 62px;
+
+    padding: 0 4px;
+
+    background: var(--cor-painel);
+    color: var(--cor-destaque);
+
+    border: 2px solid var(--cor-borda-suave);
+    border-radius: var(--raio-peq);
+
+    font: inherit;
     font-size: 30px;
     font-weight: bold;
+    font-variant-numeric: tabular-nums;
+
+    letter-spacing: 1px;
 
     text-align: center;
 
-    color: #1565c0;
-
     outline: none;
 
-    letter-spacing: 2px;
+    transition:
+        border-color var(--transicao),
+        box-shadow var(--transicao);
 }
 
-#tempoManual:focus {
-    border-color: #2196f3;
+.segmento-tempo input::placeholder {
+    color: var(--cor-texto-suave);
+    opacity: 1;
+}
+
+.segmento-tempo input:focus {
+    border-color: var(--cor-primaria);
 
     box-shadow:
-        0 0 0 3px rgba(33, 150, 243, 0.1);
+        0 0 0 3px rgba(33, 150, 243, 0.25);
+}
+
+.segmento-tempo input[aria-invalid="true"] {
+    border-color: var(--cor-perigo);
+
+    box-shadow:
+        0 0 0 3px rgba(211, 47, 47, 0.2);
+}
+
+.rotulo-segmento {
+    color: var(--cor-texto-suave);
+
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.separador-tempo {
+    height: 62px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 28px;
+    font-weight: bold;
+
+    color: var(--cor-texto-suave);
+
+    user-select: none;
+}
+
+.erro {
+    color: var(--cor-perigo);
+
+    font-size: 14px;
+    font-weight: bold;
+
+    margin-top: 8px;
 }
 
 
-/* =========================================================
-   CATEGORIAS
-========================================================= */
+/* CATEGORIAS */
 
 .opcoes-categoria {
+    display: flex;
+    flex-direction: column;
+
     gap: 8px;
 }
 
@@ -646,47 +885,68 @@ button {
 
     gap: 10px;
 
-    background: #f5faff;
+    background: var(--cor-superficie);
 
-    border: 1px solid #bbdefb;
-    border-radius: 8px;
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: var(--raio-peq);
 
     padding: 10px;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    transition:
+        background-color var(--transicao),
+        border-color var(--transicao);
 }
 
 .opcao-categoria:hover {
-    background: #e3f2fd;
+    background: var(--cor-primaria-suave);
+    border-color: var(--cor-borda);
+}
 
-    border-color: #90caf9;
+.opcao-categoria:has(input:focus-visible) {
+    outline: 3px solid var(--cor-primaria);
+    outline-offset: 2px;
+}
+
+/* O destaque sai para a linha inteira (regra acima). */
+.opcao-categoria input:focus-visible {
+    outline: none;
 }
 
 .opcao-categoria input {
     width: auto;
-}
 
-.botoes-formulario {
-    margin-top: 20px;
+    accent-color: var(--cor-primaria);
 }
 
 
 /* =========================================================
-   ANIMAÇÃO
+   ANIMAÇÕES
 ========================================================= */
 
 @keyframes aparecer {
 
     from {
         opacity: 0;
-        transform: scale(0.9);
+        transform: scale(0.92);
     }
 
     to {
         opacity: 1;
         transform: scale(1);
+    }
+
+}
+
+@keyframes fundoAparecer {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 
 }
@@ -712,15 +972,9 @@ button {
         max-width: 600px;
     }
 
-    .container,
-    .resumo {
+    .painel--principal,
+    .painel--resumo {
         width: 100%;
-
-        max-width: 560px;
-    }
-
-    .resumo {
-        margin-top: 0;
     }
 
 }
@@ -732,8 +986,8 @@ button {
         padding: 15px;
     }
 
-    .container,
-    .resumo {
+    .painel--principal,
+    .painel--resumo {
         padding: 25px 20px;
 
         border-radius: 15px;
@@ -743,9 +997,7 @@ button {
         font-size: 28px;
     }
 
-    #cronometro {
-        font-size: 42px;
-
+    .cronometro {
         letter-spacing: 1px;
     }
 
@@ -753,21 +1005,17 @@ button {
         padding: 8px;
     }
 
-    .botaoExcluir {
+    .botao-excluir {
         min-width: 65px;
 
         font-size: 13px;
     }
 
-    .tempo-categoria {
-        font-size: 22px;
-    }
-
-    .total-hoje .tempo-categoria {
+    .total--hoje .tempo-categoria {
         font-size: 24px;
     }
 
-    .total-semana .tempo-categoria {
+    .total .tempo-categoria {
         font-size: 22px;
     }
 
@@ -780,17 +1028,13 @@ button {
 
 @media (max-width: 400px) {
 
-    #cronometro {
-        font-size: 34px;
-    }
-
     .botoes-popup,
     .botoes-formulario {
         flex-direction: column;
     }
 
-    .botoes-popup button,
-    .botoes-formulario button {
+    .botoes-popup .botao,
+    .botoes-formulario .botao {
         width: 100%;
     }
 
@@ -798,6 +1042,41 @@ button {
         flex-direction: column;
 
         align-items: flex-start;
+    }
+
+    .entrada-tempo {
+        gap: 6px;
+    }
+
+    .segmento-tempo input {
+        width: 54px;
+        height: 54px;
+
+        font-size: 26px;
+    }
+
+    .separador-tempo {
+        height: 54px;
+
+        font-size: 24px;
+    }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE: RESPEITA MOVIMENTO REDUZIDO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 
 }
