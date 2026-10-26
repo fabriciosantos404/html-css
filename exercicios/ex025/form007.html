@@ -18,20 +18,41 @@
     <h1>Exemplo de Formulário</h1>
     <form action="cadastro.php" method="post" autocomplete="on">
         <p>
-            <label for="icor">Cor: </label>
-            <input type="color" name="cor" id="icor" value="#00ff00">
+            <label for="iest">Estado</label>
+            <select name="estado" id="iest">
+
+                <option value="" selected>--- Escolha ---</option>
+                <optgroup label="Região Sudeste">
+                    <option value="MG">Minas Gerais</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="SP">São Paulo</option>
+                </optgroup>
+
+                <optgroup label="Região Nordeste">
+                    <option value="MA">Maranhão</option>
+                    <option value="PE">Pernambuco</optio>
+                    <option value="RN">Rio Grande do Norte</option>
+                </optgroup>
+
+            </select>
         </p>
 
         <p>
-            <label for="inivel">Nível de Satisfação: </label>
-            <input type="range" name="nivel" id="inivel" min="1" max="5" value="2">
+            <label for="iprof">Profissão: </label>
+            <input type="text" name="prof" id="iprof" list="lstprof">
+            <datalist id="lstprof">
+                <option value="ADM">Administrador</option>
+                <option value="CONT">Contabilista</option>
+                <option value="DEV">Desenvolvedor</option>
+                <option value="PROF">Professor</option>
+            </datalist>
         </p>
 
         <p>
-            <label for="ifoto">Foto do perfil:</label> <!-- Usar method="post" -->
-            <input type="file" name="foto" id="ifoto">
+            <label for="imsg">Mensagem: </label><br>
+            <textarea name="msg" id="imsg" cols="30" rows="10" placeholder="Sua mensagem aqui..."></textarea>
         </p>
-
+    
         <p>
             <input type="submit" value="Enviar">
             <input type="reset" value="Limpar">
